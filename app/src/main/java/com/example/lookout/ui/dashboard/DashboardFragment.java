@@ -27,9 +27,9 @@ public class DashboardFragment extends FragmentActivity implements OnMapReadyCal
 //    private DashboardViewModel dashboardViewModel;
     GoogleMap map;
 
-//    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
+    //    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//    @Override
+    protected void onCreate(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_dashboard);
 
@@ -43,7 +43,7 @@ public class DashboardFragment extends FragmentActivity implements OnMapReadyCal
 //                textView.setText(s);
 //            }
 //        });
-        SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 

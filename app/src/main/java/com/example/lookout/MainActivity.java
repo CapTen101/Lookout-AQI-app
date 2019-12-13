@@ -14,9 +14,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity {
 
-    GoogleMap map;
+//    GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +30,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
 
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-
-        LatLng US = new LatLng(37.090240, -95.712891);
-        map.addMarker(new MarkerOptions().position(US).title("Unites States"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(US));
-    }
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        map = googleMap;
+//
+//        LatLng US = new LatLng(37.090240, -95.712891);
+//        map.addMarker(new MarkerOptions().position(US).title("Unites States"));
+//        map.moveCamera(CameraUpdateFactory.newLatLng(US));
+//    }
 }
