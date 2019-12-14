@@ -52,6 +52,11 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/app_logo"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_view_result" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
