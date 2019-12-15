@@ -2,6 +2,7 @@ package com.example.lookout.ui.home;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.lookout.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,72 +30,50 @@ import java.nio.charset.Charset;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private TextView mTextViewResult;
+    private HomeFragment homeFragment;
+    private static TextView mQuoteResult;
+    private static TextView mAuthorResult;
     private static final String MY_REQUEST_URL = "https://api.paperquotes.com/quotes/?tags=environment";
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-//        final TextView textView = root.findViewById(R.id.text_home);
-//        homeViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-//        mTextViewResult = mTextViewResult.findViewById(R.id.text_view_result);
-//
-//        OkHttpClient client = new OkHttpClient();
-//        String url = "https://api.paperquotes.com/quotes/?tags=environment";
-//
-//        Request request = new Request.Builder().url(url).build();
-//
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                if (response.isSuccessful()) {
-//                    final String myResponse = response.body().string();
-//
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            mTextViewResult.setText(myResponse);
-//                        }
-//                    });
-//                }
-//            }
-//        });
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+    View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        mQuoteResult = root.findViewById(R.id.quote);
+
+        HttpGetRequest requestAPI = new HttpGetRequest();
+        requestAPI.execute();
         return root;
     }
 
-    public static class HttpGetRequest extends AsyncTask<URL, Void, String> {
-        //
+    public static class HttpGetRequest extends AsyncTask<URL, String, String> {
+
         @Override
         protected String doInBackground(URL... urls) {
 
-//            URL url = createUrl(MY_REQUEST_URL);
             URL url = null;
             try {
                 url = new URL(MY_REQUEST_URL);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
+            } catch (MalformedURLException exception) {
+                Log.e("errorTag", "Error with creating URL", exception);
+                return null;
             }
+            
             String jsonResponse = "";
-
             try {
                 jsonResponse = makeHttpRequest(url);
             } catch (IOException e) {
-
+                Log.e("errorTag","Error in request");
             }
-            return null;
+            return jsonResponse;
         }
-        
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            mQuoteResult.setText(s);
+
+        }
+
         private String makeHttpRequest(URL url) throws IOException {
             String jsonResponse = "";
             HttpURLConnection urlConnection = null;
@@ -98,44 +81,62 @@ public class HomeFragment extends Fragment {
             try {
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
-                urlConnection.setReadTimeout(10000 /* milliseconds */);
-                urlConnection.setConnectTimeout(15000 /* milliseconds */);
-                urlConnection.setRequestProperty("Authorization", "Token 172042d987190caa93db3ee3f0ac135938054fab");
+                urlConnection.setRequestProperty("Authorization", "Token 2e9072a007f0fcd23d80fc5537a5c174bee9ff47");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.connect();
 
                 inputStream = urlConnection.getInputStream();
-                jsonResponse = readFromStream(inputStream);
+                jsonResponse = readQuote(inputStream);
+
             } catch (IOException e) {
 
             } finally {
                 if (urlConnection != null) {
                     urlConnection.disconnect();
                 }
-                if (inputStream != null) {
-                    inputStream.close();
-                }
             }
             return jsonResponse;
         }
 
-        private String readFromStream(InputStream inputStream) throws IOException {
-            StringBuilder output = new StringBuilder();
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
-                BufferedReader reader = new BufferedReader(inputStreamReader);
-                String line = reader.readLine();
-                while (line != null) {
-                    output.append(line);
-                    line = reader.readLine();
+        private String readQuote(InputStream inputStream) throws IOException {
+            String copyOutput = null;
+                StringBuilder output = new StringBuilder();
+                if (inputStream != null) {
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+                    BufferedReader reader = new BufferedReader(inputStreamReader);
+                    String line = reader.readLine();
+                    while (line != null) {
+                        output.append(line);
+                        line = reader.readLine();
+                    }
                 }
+
+                String finalOutput = output.toString();
+            JSONObject parentObject = null;
+            try {
+                parentObject = new JSONObject(finalOutput);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            return output.toString();
+            JSONArray parentArray = null;
+            try {
+                parentArray = parentObject.getJSONArray("results");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            JSONObject quoteObject = null;
+            try {
+                quoteObject = parentArray.getJSONObject(0);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                String quote = quoteObject.getString("quote");
+                copyOutput = quote;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return copyOutput;
         }
-
-
-
-
-
     }
 }

@@ -55,7 +55,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/quote" />
+        android:id="@+id/quote"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,6 +70,18 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/lookout_text"
         android:layout_marginTop="81dp"/>
+
+<!--    <fragment-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:name="com.example.lookout.ui.home.HomeFragment" >-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/quote"-->
+<!--            android:layout_centerHorizontal="true"/>-->
+<!--    </fragment>-->
 
 
 </RelativeLayout>
