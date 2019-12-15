@@ -1,25 +1,3 @@
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    android:background="@drawable/map_tile_background"-->
-<!--    android:id="@+id/home_background">-->
-
-<!--    <ImageView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:alpha="0.3"-->
-<!--        android:scaleType="fitXY"-->
-<!--        android:src="@drawable/map_tile_background" />-->
-
-<!--    <ImageView-->
-<!--        android:layout_width="153dp"-->
-<!--        android:layout_height="153dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:background="@drawable/probable_app_icon" />-->
-
-<!--</RelativeLayout>-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -52,36 +30,34 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/app_logo"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/quote"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/author" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/quote_circle"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/lookout_text"
-        android:layout_marginTop="81dp"/>
+        android:layout_marginTop="81dp"
+        android:elevation="5dp"/>
 
-<!--    <fragment-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:name="com.example.lookout.ui.home.HomeFragment" >-->
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="208dp"
+        android:layout_height="33dp"
+        android:layout_alignTop="@id/quote"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="170dp"
+        android:fontFamily="@font/rosario_regular"
+        android:textSize="25sp"
+        android:elevation="5dp"/>
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/quote"-->
-<!--            android:layout_centerHorizontal="true"/>-->
-<!--    </fragment>-->
-
+    <TextView
+        android:id="@+id/quote"
+        android:layout_width="159dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="400dp"
+        android:fontFamily="@font/rosario_regular"
+        android:textSize="20sp"
+        android:elevation="5dp"/>
 
 </RelativeLayout>
