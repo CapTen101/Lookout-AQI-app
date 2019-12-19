@@ -3,4 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="hazardous">Hazardous</string>
+    <string name="unhealthy">Unhealthy</string>
+    <string name="good">Good</string>
+    <string name="moderate">Moderate</string>
+    <string name="very_unhealthy">Very Unhealthy</string>
+    <string name="unhealhy_for_sensitive_groups">Unhealthy for sensitive groups</string>
+    <string name="us_aqi">US AQI</string>
 </resources>
