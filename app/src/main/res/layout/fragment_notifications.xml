@@ -1,21 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/map_tile_background"
+        android:alpha="0.1"
+        android:scaleType="fitXY"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nearest_data_button"
+        android:text="Click here for nearest city data"
+        android:layout_margin="19dp"
+        android:background="@color/app_green"
+        android:shadowColor="@android:color/darker_gray" />
+
     <SearchView
-        android:id="@+id/search_view"
+        android:id="@+id/country_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
-        android:queryHint="Search your city here" />
+        android:queryHint="Search your country here"
+        android:layout_below="@id/nearest_data_button"/>
+
+    <SearchView
+        android:id="@+id/state_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search your state here"
+        android:layout_below="@id/country_search"/>
+
+    <SearchView
+        android:id="@+id/city_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search your city here"
+        android:layout_below="@id/state_search"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/search_view"/>
+        android:layout_below="@id/city_search"/>
 
 </RelativeLayout>
 

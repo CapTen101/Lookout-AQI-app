@@ -32,8 +32,8 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private HomeFragment homeFragment;
-    private static TextView mQuoteResult;
-    private static TextView mAuthorResult;
+    private TextView mQuoteResult;
+    private TextView mAuthorResult;
     private static final String MY_REQUEST_URL = "https://api.paperquotes.com/quotes/?tags=environment";
     private Random rand = new Random();
     int randomIndex = rand.nextInt(5);
@@ -131,9 +131,6 @@ public class HomeFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-//            Random rand = new Random();                     //For generating a random quote from a JSONObject
-//            int randomIndex = rand.nextInt(5);
 
             JSONObject quoteObject = null;
             try {
