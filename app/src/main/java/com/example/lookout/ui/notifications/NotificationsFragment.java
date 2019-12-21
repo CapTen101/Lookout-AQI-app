@@ -1,5 +1,6 @@
 package com.example.lookout.ui.notifications;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,9 +47,9 @@ public class NotificationsFragment extends Fragment {
     private SearchView countrySearch;
     private SearchView stateSearch;
     private SearchView citySearch;
-    private String[] countryList = null;
-    private String[] stateList = null;
-    private String[] cityList = null;
+    private String[] countryList;
+    private String[] stateList;
+    private String[] cityList;
     private static final String MY_IP_URL = "https://api.ipify.org?format=json";
     private static final String MY_NEAREST_URL = "https://api.airvisual.com/v2/nearest_city?key=9a11661d-a1a4-4629-8030-3669adaade7d";
     private final String CITY_LIST_URL = "api.airvisual.com/v2/cities?state=" + myState + "&country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
@@ -58,7 +59,18 @@ public class NotificationsFragment extends Fragment {
         notificationsViewModel = ViewModelProviders.of(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        nearestData = root.findViewById(R.id.nearest_data_button);
+        nearestData =root.findViewById(R.id.nearest_data_button);
+        nearestData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentnearest = new Intent(getActivity(), NearestActivity.class);
+                startActivity(intentnearest);
+
+                NearestHttpRequest requestNearest = new NearestHttpRequest();
+                requestNearest.execute();
+            }
+        });
+
         countrySearch = root.findViewById(R.id.country_search);
         stateSearch = root.findViewById(R.id.state_search);
         citySearch = root.findViewById(R.id.city_search);
@@ -268,9 +280,14 @@ public class NotificationsFragment extends Fragment {
 
             String finalOutput = output.toString();
             String dataOutput;
+            String weatherOutput;
+            String pollutionOutput;
             JSONObject parentObject;
             JSONArray dataArray;
             JSONObject dataObject;
+            JSONArray currentArray;
+            JSONArray weatherArray;
+            JSONArray pollutionArray;
             try {
                 parentObject = new JSONObject(finalOutput);
                 dataArray = parentObject.getJSONArray("data");
@@ -279,6 +296,13 @@ public class NotificationsFragment extends Fragment {
                 myCity = dataObject.getString("city");
                 myState = dataObject.getString("state");
                 myCountry = dataObject.getString("country");
+                currentArray = dataObject.getJSONArray("current");
+                weatherArray = currentArray.getJSONArray(0);
+                weatherOutput = weatherArray.toString();
+                pollutionArray = currentArray.getJSONArray(1);
+                pollutionOutput = pollutionArray.toString();
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

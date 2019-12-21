@@ -10,4 +10,6 @@
     <string name="very_unhealthy">Very Unhealthy</string>
     <string name="unhealhy_for_sensitive_groups">Unhealthy for sensitive groups</string>
     <string name="us_aqi">US AQI</string>
+    <string name="title_activity_nearest">NearestActivity</string>
+    <string name="mapbox_key">sk.eyJ1IjoiY2FwdGVuMTAxIiwiYSI6ImNrNGZ0MjhmbjBwbjQza2xodDZldDVvbmMifQ.GH_y3mEI-BC9gcnj0mHQSw</string>
 </resources>

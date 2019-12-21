@@ -119,31 +119,19 @@ public class HomeFragment extends Fragment {
             }
 
             String finalOutput = output.toString();
-            JSONObject parentObject = null;
+            JSONObject parentObject;
+            JSONArray parentArray;
+            JSONObject quoteObject;
             try {
                 parentObject = new JSONObject(finalOutput);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            JSONArray parentArray = null;
-            try {
                 parentArray = parentObject.getJSONArray("results");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            JSONObject quoteObject = null;
-            try {
                 quoteObject = parentArray.getJSONObject(randomIndex);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
                 String quote = quoteObject.getString("quote");
                 copyOutput = quote;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             return copyOutput;
         }
     }
@@ -214,31 +202,19 @@ public class HomeFragment extends Fragment {
             }
 
             String finalOutput = output.toString();
-            JSONObject parentObject = null;
+            JSONObject parentObject;
+            JSONArray parentArray;
+            JSONObject authorObject;
             try {
                 parentObject = new JSONObject(finalOutput);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            JSONArray parentArray = null;
-            try {
                 parentArray = parentObject.getJSONArray("results");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            JSONObject authorObject = null;
-            try {
                 authorObject = parentArray.getJSONObject(randomIndex);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
                 String author = authorObject.getString("author");
                 copyOutput = author;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             return copyOutput;
         }
     }
