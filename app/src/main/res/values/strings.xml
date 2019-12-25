@@ -12,4 +12,5 @@
     <string name="us_aqi">US AQI</string>
     <string name="title_activity_nearest">NearestActivity</string>
     <string name="mapbox_key">sk.eyJ1IjoiY2FwdGVuMTAxIiwiYSI6ImNrNGZ0MjhmbjBwbjQza2xodDZldDVvbmMifQ.GH_y3mEI-BC9gcnj0mHQSw</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -152,9 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@id/aqi"
-                    android:layout_alignStart="@id/aqi"
                     android:layout_below="@id/aqi"
-                    android:layout_marginStart="9dp"
                     android:text="@string/us_aqi" />
 
                 <TextView
