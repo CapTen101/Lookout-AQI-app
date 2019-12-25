@@ -8,16 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lookout.R;
 
@@ -33,8 +28,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NotificationsFragment extends Fragment {
 
@@ -52,14 +45,14 @@ public class NotificationsFragment extends Fragment {
     private String[] cityList;
     private static final String MY_IP_URL = "https://api.ipify.org?format=json";
     private static final String MY_NEAREST_URL = "https://api.airvisual.com/v2/nearest_city?key=9a11661d-a1a4-4629-8030-3669adaade7d";
-    private final String CITY_LIST_URL = "api.airvisual.com/v2/cities?state=" + myState + "&country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
+//    private final String CITY_LIST_URL = "api.airvisual.com/v2/cities?state=" + myState + "&country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel = ViewModelProviders.of(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        nearestData =root.findViewById(R.id.nearest_data_button);
+        nearestData = root.findViewById(R.id.nearest_data_button);
         nearestData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,57 +79,56 @@ public class NotificationsFragment extends Fragment {
 //            }
 //        });
 
-        RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return root;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+//    public class ViewHolder extends RecyclerView.ViewHolder {
+//
+//        CardView cv;
+//        CircleImageView image;
+//        TextView temperature;
+//        TextView city;
+//        TextView country;
+//        TextView aqi;
+//        TextView category;
+//        ImageView weatherIcon;
+//
+//        public ViewHolder(View ItemView) {
+//            super(ItemView);
+//            cv = ItemView.findViewById(R.id.card_container);
+//            image = ItemView.findViewById(R.id.list_image);
+//            temperature = ItemView.findViewById(R.id.temperature);
+//            city = ItemView.findViewById(R.id.city);
+//            country = ItemView.findViewById(R.id.country);
+//            aqi = ItemView.findViewById(R.id.aqi);
+//            category = ItemView.findViewById(R.id.category);
+//            weatherIcon = ItemView.findViewById(R.id.weather_icon);
+//        }
+//    }
 
-        CardView cv;
-        CircleImageView image;
-        TextView temperature;
-        TextView city;
-        TextView country;
-        TextView aqi;
-        TextView category;
-        ImageView weatherIcon;
-
-        public ViewHolder(View ItemView) {
-            super(ItemView);
-            cv = ItemView.findViewById(R.id.card_container);
-            image = ItemView.findViewById(R.id.list_image);
-            temperature = ItemView.findViewById(R.id.temperature);
-            city = ItemView.findViewById(R.id.city);
-            country = ItemView.findViewById(R.id.country);
-            aqi = ItemView.findViewById(R.id.aqi);
-            category = ItemView.findViewById(R.id.category);
-            weatherIcon = ItemView.findViewById(R.id.weather_icon);
-        }
-    }
-
-    public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
-
-        public RecyclerAdapter() {
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return null;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return 0;
-        }
-    }
-
+//    public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
+//
+//        public RecyclerAdapter() {
+//        }
+//
+//        @NonNull
+//        @Override
+//        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//            return null;
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+//
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return 0;
+//        }
+//    }
 
     public class IPHttpRequest extends AsyncTask<URL, String, String> {
 

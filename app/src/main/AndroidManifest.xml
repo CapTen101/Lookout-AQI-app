@@ -24,7 +24,8 @@
         android:roundIcon="@mipmap/lookout_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.notifications.NearestActivity"></activity>
+        <activity android:name=".ui.notifications.NearestActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
 <!--        <meta-data-->
 <!--            android:name="com.google.android.geo.API_KEY"-->

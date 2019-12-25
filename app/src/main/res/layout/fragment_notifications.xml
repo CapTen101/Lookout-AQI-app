@@ -1,53 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/map_tile_background"
         android:alpha="0.1"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY"
+        android:src="@drawable/map_tile_background" />
 
     <Button
+        android:id="@+id/nearest_data_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nearest_data_button"
-        android:text="Click here for nearest city data"
         android:layout_margin="19dp"
         android:background="@color/app_green"
-        android:shadowColor="@android:color/darker_gray" />
+        android:shadowColor="@android:color/darker_gray"
+        android:text="Click here for nearest city data" />
 
     <SearchView
         android:id="@+id/country_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/nearest_data_button"
         android:iconifiedByDefault="false"
-        android:queryHint="Search your country here"
-        android:layout_below="@id/nearest_data_button"/>
+        android:queryHint="Search your country here" />
 
     <SearchView
         android:id="@+id/state_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/country_search"
         android:iconifiedByDefault="false"
-        android:queryHint="Search your state here"
-        android:layout_below="@id/country_search"/>
+        android:queryHint="Search your state here" />
 
     <SearchView
         android:id="@+id/city_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/state_search"
         android:iconifiedByDefault="false"
-        android:queryHint="Search your city here"
-        android:layout_below="@id/state_search"/>
+        android:queryHint="Search your city here" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/city_search"/>
+<!--    <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/city_search"-->
+<!--        android:layout_marginTop="60dp">-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/layout_left"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="170dp">-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@color/colorAccent"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/weather_icon"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:src="@drawable/ic_01d" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/temperature"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginEnd="2dp"-->
+<!--                    android:text="13°"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textSize="25sp" />-->
+
+<!--            </RelativeLayout>-->
+
+
+<!--            <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                android:id="@+id/list_image"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="130dp"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:src="@mipmap/ic_launcher" />-->
+
+
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@color/subtle_grey">-->
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/city"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:text="New Delhi"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/country"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/city"-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:text="Delhi, India" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/aqi"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/country"-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:text="345"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="60sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/us_aqi"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignEnd="@id/aqi"-->
+<!--                android:layout_alignBottom="@id/aqi"-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:text="@string/us_aqi" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/category"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:text="@string/hazardous"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@android:color/holo_blue_light"-->
+<!--                android:textSize="30sp" />-->
+<!--        </RelativeLayout>-->
+
+<!--    </androidx.appcompat.widget.LinearLayoutCompat>-->
 
 </RelativeLayout>
+
 

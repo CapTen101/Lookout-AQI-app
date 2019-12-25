@@ -8,24 +8,14 @@
     android:background="@color/subtle_grey"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <TextView
-        android:id="@+id/fragment_below_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center_horizontal"
-        android:text="yoyoyo"/>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/location_frag_cardview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginVertical="50dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center_horizontal"
         app:cardCornerRadius="30dp"
-        app:cardElevation="@dimen/cardview_default_elevation">
+        app:cardElevation="5dp">
 
         <FrameLayout
             android:id="@+id/location_frag_container"
