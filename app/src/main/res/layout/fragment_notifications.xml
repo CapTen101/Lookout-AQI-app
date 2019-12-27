@@ -83,7 +83,7 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="2dp"
-                        android:text="13°"
+                        android:text="--°"
                         android:textAlignment="center"
                         android:textSize="27sp" />
 
@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:text="New Delhi"
+                    android:text="---"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/city"
                     android:layout_marginStart="15dp"
-                    android:text="Delhi" />
+                    android:text="--" />
 
                 <TextView
                     android:id="@+id/country"
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/state"
                     android:layout_marginStart="15dp"
-                    android:text="India" />
+                    android:text="--" />
 
 
                 <TextView
@@ -142,7 +142,7 @@
                     android:layout_below="@id/country"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="4dp"
-                    android:text="345"
+                    android:text="---"
                     android:fontFamily="@font/ruluko_regular"
                     android:textColor="@android:color/black"
                     android:textSize="60sp" />
@@ -164,7 +164,7 @@
                     android:layout_marginEnd="10dp"
                     android:background="@color/app_green"
                     android:gravity="center_horizontal"
-                    android:text="@string/hazardous"
+                    android:text="---"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="28.5sp"

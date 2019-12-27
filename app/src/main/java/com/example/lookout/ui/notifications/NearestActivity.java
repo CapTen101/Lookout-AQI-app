@@ -34,6 +34,12 @@ public class NearestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearest);
+
+        IPHttpRequest requestIP = new IPHttpRequest();
+        requestIP.execute();
+
+        NearestHttpRequest requestNearest = new NearestHttpRequest();
+        requestNearest.execute();
     }
 
     public class IPHttpRequest extends AsyncTask<URL, String, String> {
@@ -199,8 +205,6 @@ public class NearestActivity extends AppCompatActivity {
                 weatherOutput = weatherArray.toString();
                 pollutionArray = currentArray.getJSONArray(1);
                 pollutionOutput = pollutionArray.toString();
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }

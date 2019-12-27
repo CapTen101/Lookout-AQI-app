@@ -1,25 +1,3 @@
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    android:background="@drawable/map_tile_background"-->
-<!--    android:id="@+id/home_background">-->
-
-<!--    <ImageView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:alpha="0.3"-->
-<!--        android:scaleType="fitXY"-->
-<!--        android:src="@drawable/map_tile_background" />-->
-
-<!--    <ImageView-->
-<!--        android:layout_width="153dp"-->
-<!--        android:layout_height="153dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:background="@drawable/probable_app_icon" />-->
-
-<!--</RelativeLayout>-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"

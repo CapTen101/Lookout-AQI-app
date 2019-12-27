@@ -67,7 +67,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="13dp"
                     android:fontFamily="@font/ruluko_regular"
-                    android:text="345"
+                    android:text="---"
                     android:textColor="@android:color/black"
                     android:textSize="60sp" />
 
@@ -88,7 +88,7 @@
                     android:layout_marginEnd="10dp"
                     android:fontFamily="@font/ruluko_regular"
                     android:gravity="center_horizontal"
-                    android:text="@string/hazardous"
+                    android:text="---"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="28.5sp" />
@@ -99,11 +99,11 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/second_card"
+        android:id="@+id/suggestion_card"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_below="@id/head_card"
-        android:layout_margin="20dp"
+        android:layout_margin="14dp"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="10dp">
 
@@ -141,85 +141,130 @@
 
     </androidx.cardview.widget.CardView>
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:id="@+id/info_card"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@id/second_card"-->
-<!--        android:layout_margin="10dp"-->
-<!--        app:cardCornerRadius="10dp">-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/atmosphere_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/suggestion_card"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="10dp">
 
-<!--        <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
-<!--            <ImageView-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:src="@drawable/temperature"-->
+            <TextView
+                android:id="@+id/temperature_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ruluko_regular"
+                android:text="Temperature: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="Temperature: "-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textSize="24sp"/>-->
-<!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+            <TextView
+                android:id="@+id/temperature_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/temperature_tag"
+                android:fontFamily="@font/ruluko_regular"
+                android:text="--"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-<!--        <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
+            <TextView
+                android:id="@+id/pressure_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/temperature_tag"
+                android:fontFamily="@font/ruluko_regular"
+                android:text="Pressure: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-<!--            <ImageView-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:src="@drawable/temperature"-->
+            <TextView
+                android:id="@+id/pressure_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/temperature_tag"
+                android:layout_toEndOf="@id/pressure_tag"
+                android:fontFamily="@font/ruluko_regular"
+                android:text="--"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="Temperature: "-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textSize="24sp"/>-->
-<!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+            <TextView
+                android:id="@+id/humidity_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pressure_tag"
+                android:fontFamily="@font/ruluko_regular"
+                android:text="Humidity: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-<!--        <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
+            <TextView
+                android:id="@+id/humidity_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pressure_tag"
+                android:layout_toEndOf="@id/humidity_tag"
+                android:fontFamily="@font/ruluko_regular"
+                android:text="--"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-<!--            <ImageView-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:src="@drawable/temperature"-->
+            <TextView
+                android:id="@+id/windspeed_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/humidity_tag"
+                android:fontFamily="@font/ruluko_regular"
+                android:text="Wind Speed: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="Temperature: "-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textSize="24sp"/>-->
-<!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+            <TextView
+                android:id="@+id/windspeed_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/humidity_tag"
+                android:layout_toEndOf="@id/windspeed_tag"
+                android:fontFamily="@font/ruluko_regular"
+                android:text="--"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-<!--        <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
+            <TextView
+                android:id="@+id/winddirection_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/windspeed_tag"
+                android:fontFamily="@font/ruluko_regular"
+                android:text="Wind Direction: "
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-<!--            <ImageView-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:src="@drawable/temperature"/>-->
+            <TextView
+                android:id="@+id/winddirection_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/windspeed_tag"
+                android:layout_toEndOf="@id/winddirection_tag"
+                android:fontFamily="@font/ruluko_regular"
+                android:text="--"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="Temperature: "-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textSize="24sp"/>-->
-<!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
-<!--    </androidx.cardview.widget.CardView>-->
+            <ImageView
+                android:id="@+id/weather_icon"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@id/winddirection_tag"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_03d" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

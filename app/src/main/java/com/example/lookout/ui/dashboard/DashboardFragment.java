@@ -16,13 +16,13 @@ public class DashboardFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        Button GoToMap;
-        GoToMap = root.findViewById(R.id.map_button);
-        GoToMap.setOnClickListener(new View.OnClickListener() {
+
+        Button map_button = root.findViewById(R.id.mapbutton);
+        map_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentnearest = new Intent(getActivity(), MapsActivity.class);
-                startActivity(intentnearest);
+                Intent openMap = new Intent(getActivity(), AQIMap.class);
+                startActivity(openMap);
             }
         });
         return root;
