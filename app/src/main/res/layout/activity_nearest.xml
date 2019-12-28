@@ -42,7 +42,7 @@
                     android:layout_marginStart="9dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginBottom="9dp"
-                    android:background="@color/app_green"
+                    android:background="@color/ic_green"
                     android:src="@drawable/ic_face_green" />
 
             </RelativeLayout>
@@ -55,28 +55,64 @@
                 android:layout_marginBottom="9dp">
 
                 <ImageView
+                    android:id="@+id/other_side_face_color"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:alpha="0.5"
                     android:background="@color/app_green" />
 
                 <TextView
-                    android:id="@+id/aqi"
+                    android:id="@+id/city_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="13dp"
+                    android:text="---"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/state_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/city_value"
+                    android:layout_marginStart="15dp"
+                    android:text="--"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/comma"
+                    android:text=", "
+                    android:layout_toEndOf="@id/state_value"
+                    android:layout_below="@id/city_value"/>
+
+                <TextView
+                    android:id="@+id/country_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/comma"
+                    android:layout_below="@id/city_value"
+                    android:text="--"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/aqi_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/state_value"
+                    android:layout_marginStart="15dp"
                     android:fontFamily="@font/ruluko_regular"
                     android:text="---"
                     android:textColor="@android:color/black"
-                    android:textSize="60sp" />
+                    android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/us_aqi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/aqi"
-                    android:layout_alignEnd="@id/aqi"
+                    android:layout_below="@id/aqi_value"
+                    android:layout_alignEnd="@id/aqi_value"
                     android:text="@string/us_aqi" />
 
                 <TextView
@@ -110,28 +146,32 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="4dp"
+            android:layout_margin="11.5dp"
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/suggestionIcon1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/ic_health_airpurifier_red" />
 
             <ImageView
+                android:id="@+id/suggestionIcon2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_health_mask_red" />
+                android:src="@drawable/ic_health_window_red" />
 
             <ImageView
+                android:id="@+id/suggestionIcon3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/ic_health_window_green" />
 
             <ImageView
+                android:id="@+id/suggestionIcon4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -150,9 +190,9 @@
         app:cardCornerRadius="10dp">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp">
+            android:layout_margin="9dp">
 
             <TextView
                 android:id="@+id/temperature_tag"
@@ -161,7 +201,8 @@
                 android:fontFamily="@font/ruluko_regular"
                 android:text="Temperature: "
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="7dp"/>
 
             <TextView
                 android:id="@+id/temperature_value"
@@ -171,7 +212,8 @@
                 android:fontFamily="@font/ruluko_regular"
                 android:text="--"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="7dp"/>
 
             <TextView
                 android:id="@+id/pressure_tag"
@@ -181,7 +223,8 @@
                 android:fontFamily="@font/ruluko_regular"
                 android:text="Pressure: "
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="7dp"/>
 
             <TextView
                 android:id="@+id/pressure_value"
@@ -192,7 +235,8 @@
                 android:fontFamily="@font/ruluko_regular"
                 android:text="--"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="7dp"/>
 
             <TextView
                 android:id="@+id/humidity_tag"
@@ -202,7 +246,8 @@
                 android:fontFamily="@font/ruluko_regular"
                 android:text="Humidity: "
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="7dp"/>
 
             <TextView
                 android:id="@+id/humidity_value"
@@ -213,7 +258,8 @@
                 android:fontFamily="@font/ruluko_regular"
                 android:text="--"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="7dp"/>
 
             <TextView
                 android:id="@+id/windspeed_tag"
@@ -223,7 +269,8 @@
                 android:fontFamily="@font/ruluko_regular"
                 android:text="Wind Speed: "
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="7dp"/>
 
             <TextView
                 android:id="@+id/windspeed_value"
@@ -234,7 +281,8 @@
                 android:fontFamily="@font/ruluko_regular"
                 android:text="--"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="7dp"/>
 
             <TextView
                 android:id="@+id/winddirection_tag"
@@ -244,7 +292,8 @@
                 android:fontFamily="@font/ruluko_regular"
                 android:text="Wind Direction: "
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="7dp"/>
 
             <TextView
                 android:id="@+id/winddirection_value"
@@ -255,15 +304,15 @@
                 android:fontFamily="@font/ruluko_regular"
                 android:text="--"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:layout_marginBottom="7dp"/>
 
             <ImageView
                 android:id="@+id/weather_icon"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:layout_below="@id/winddirection_tag"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_03d" />
+                android:layout_centerInParent="true" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

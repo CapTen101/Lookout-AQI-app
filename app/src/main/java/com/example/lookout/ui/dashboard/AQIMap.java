@@ -27,7 +27,7 @@ public class AQIMap extends FragmentActivity implements OnMapReadyCallback {
         GoogleMap mMap;
         mMap = googleMap;
 
-        LatLng sydney = new LatLng(20, 80);
+        LatLng sydney = new LatLng(29.531814, 34.939443);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
