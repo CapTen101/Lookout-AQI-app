@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
         @Override
         protected String doInBackground(URL... urls) {
 
-            URL url = null;
+            URL url;
             try {
                 url = new URL(MY_REQUEST_URL);
             } catch (MalformedURLException exception) {
@@ -83,17 +83,18 @@ public class HomeFragment extends Fragment {
 
         private String makeHttpRequest(URL url) throws IOException {
             String jsonResponse = "";
-            HttpURLConnection urlConnection = null;
-            InputStream inputStream = null;
+            HttpURLConnection urlConnection;
+            InputStream inputStream;
 
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.setRequestProperty("Authorization", "Token 2e9072a007f0fcd23d80fc5537a5c174bee9ff47");
-                urlConnection.setRequestProperty("Content-Type", "application/json");
-                urlConnection.connect();
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestProperty("Authorization", "Token 2e9072a007f0fcd23d80fc5537a5c174bee9ff47");
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.connect();
 
-                inputStream = urlConnection.getInputStream();
-                jsonResponse = readInputStream(inputStream);
+            inputStream = urlConnection.getInputStream();
+            jsonResponse = readInputStream(inputStream);
+            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -118,9 +119,16 @@ public class HomeFragment extends Fragment {
             try {
                 parentObject = new JSONObject(finalOutput);
                 parentArray = parentObject.getJSONArray("results");
-                quoteObject = parentArray.getJSONObject(randomIndex);
-                String quote = quoteObject.getString("quote");
-                copyOutput = quote;
+                if (randomIndex != 4) {
+                    quoteObject = parentArray.getJSONObject(randomIndex);
+                    String author = quoteObject.getString("quote");
+                    copyOutput = author;
+                } else {
+                    randomIndex = 2;
+                    quoteObject = parentArray.getJSONObject(randomIndex);
+                    String author = quoteObject.getString("quote");
+                    copyOutput = author;
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -194,9 +202,17 @@ public class HomeFragment extends Fragment {
             try {
                 parentObject = new JSONObject(finalOutput);
                 parentArray = parentObject.getJSONArray("results");
-                authorObject = parentArray.getJSONObject(randomIndex);
-                String author = authorObject.getString("author");
-                copyOutput = author;
+                if (randomIndex != 4) {
+                    authorObject = parentArray.getJSONObject(randomIndex);
+                    String author = authorObject.getString("author");
+                    copyOutput = author;
+                } else {
+                    randomIndex = 2;
+                    authorObject = parentArray.getJSONObject(randomIndex);
+                    String author = authorObject.getString("author");
+                    copyOutput = author;
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
