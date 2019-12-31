@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.lookout">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -23,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity android:name=".ui.notifications.CARDInfo"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,7 +37,7 @@
 
         <activity
             android:name=".ui.dashboard.AQIMap"
-            android:label="@string/title_activity_aqimap"></activity>
+            android:label="@string/title_activity_aqimap" />
         <activity
             android:name=".ui.notifications.NearestActivity"
             android:theme="@style/AppTheme.NoActionBar" />

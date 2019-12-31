@@ -9,16 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.lookout.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,22 +28,26 @@ import java.nio.charset.Charset;
 
 public class NotificationsFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
-    private String myIP;
+//    private String myIP;
     private String myCity;
     private String myState;
     private String myCountry;
-    private String[] countryList;
+    private String[] countryList = new String[96];
     private String[] stateList;
     private String[] cityList;
+    private SearchView countrySearch;
+    private SearchView stateSearch;
+    private SearchView citySearch;
+    private TextView test;
 
+    private static final String MY_IP_URL = "https://api.ipify.org?format=json";
     private final String COUNTRY_LIST_URL = "api.airvisual.com/v2/countries?key=9a11661d-a1a4-4629-8030-3669adaade7d";
     private final String STATE_LIST_URL = "api.airvisual.com/v2/states?country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
     private final String CITY_LIST_URL = "api.airvisual.com/v2/cities?state=" + myState + "&country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
+    private final String SPECIFIC_CITY_URL = "api.airvisual.com/v2/city?city=" + myCity + "&state=" + myState + "&country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel = ViewModelProviders.of(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
         Button nearestData;
@@ -64,62 +65,96 @@ public class NotificationsFragment extends Fragment {
         aqiCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentNearest = new Intent(getActivity(), NearestActivity.class);
+                Intent intentNearest = new Intent(getActivity(), CARDInfo.class);
                 startActivity(intentNearest);
             }
         });
 
-        SearchView countrySearch;
-        SearchView stateSearch;
-        SearchView citySearch;
         countrySearch = root.findViewById(R.id.country_search);
         stateSearch = root.findViewById(R.id.state_search);
         citySearch = root.findViewById(R.id.city_search);
+        test = root.findViewById(R.id.testyoyo);
 
-//        final TextView textView = root.findViewById(R.id.text_notifications);
-//        notificationsViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+//        IPHttpRequest requestIP = new IPHttpRequest();
+//        requestIP.execute();
 
-//        RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        COUNTRYHttpRequest requestCountry = new COUNTRYHttpRequest();
+        requestCountry.execute();
+
+
         return root;
     }
 
-//    public class ViewHolder extends RecyclerView.ViewHolder {
+//    public class IPHttpRequest extends AsyncTask<URL, String, String> {
 //
-//        CardView cv;
-//        CircleImageView image;
-//        TextView temperature;
-//        TextView city;
-//        TextView country;
-//        TextView aqi;
-//        TextView category;
-//        ImageView weatherIcon;
+//        @Override
+//        protected String doInBackground(URL... urls) {
 //
-//        public ViewHolder(View ItemView) {
-//            super(ItemView);
-//            cv = ItemView.findViewById(R.id.card_container);
-//            image = ItemView.findViewById(R.id.list_image);
-//            temperature = ItemView.findViewById(R.id.temperature);
-//            city = ItemView.findViewById(R.id.city);
-//            country = ItemView.findViewById(R.id.country);
-//            aqi = ItemView.findViewById(R.id.aqi);
-//            category = ItemView.findViewById(R.id.category);
-//            weatherIcon = ItemView.findViewById(R.id.weather_icon);
+//            URL url;
+//            try {
+//                url = new URL(MY_IP_URL);
+//            } catch (MalformedURLException exception) {
+//                Log.e("errorTag", "Error with creating URL", exception);
+//                return null;
+//            }
+//
+//            String jsonResponse = "";
+//            try {
+//                jsonResponse = makeHttpRequest(url);
+//            } catch (IOException e) {
+//                Log.e("errorTag", "Error in request");
+//            }
+//            return jsonResponse;
+//        }
+//
+//        private String makeHttpRequest(URL url) throws IOException {
+//            String jsonResponse;
+//            HttpURLConnection urlConnection;
+//            InputStream inputStream;
+//            urlConnection = (HttpURLConnection) url.openConnection();
+//            urlConnection.setRequestMethod("GET");
+//            urlConnection.connect();
+//            inputStream = urlConnection.getInputStream();
+//            jsonResponse = readInputStream(inputStream);
+//            urlConnection.disconnect();
+//
+//            return jsonResponse;
+//        }
+//
+//        private String readInputStream(InputStream inputStream) throws IOException {
+//            StringBuilder output = new StringBuilder();
+//            if (inputStream != null) {
+//                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+//                BufferedReader reader = new BufferedReader(inputStreamReader);
+//                String line = reader.readLine();
+//                while (line != null) {
+//                    output.append(line);
+//                    line = reader.readLine();
+//                }
+//            }
+//
+//            JSONObject parentObject;
+//            try {
+//                parentObject = new JSONObject(output.toString());
+//                myIP = parentObject.getString("ip");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            return output.toString();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            super.onPostExecute(s);
 //        }
 //    }
-
 
     public class COUNTRYHttpRequest extends AsyncTask<URL, String, String> {
 
         @Override
         protected String doInBackground(URL... urls) {
 
-            URL url = null;
+            URL url;
             try {
                 url = new URL(COUNTRY_LIST_URL);
             } catch (MalformedURLException exception) {
@@ -138,28 +173,22 @@ public class NotificationsFragment extends Fragment {
 
         private String makeHttpRequest(URL url) throws IOException {
             String jsonResponse = "";
-            HttpURLConnection urlConnection = null;
-            InputStream inputStream = null;
-            try {
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.connect();
+            HttpURLConnection urlConnection;
+            InputStream inputStream;
 
-                inputStream = urlConnection.getInputStream();
-                jsonResponse = readInputStream(inputStream);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
 
-            } catch (IOException e) {
+            inputStream = urlConnection.getInputStream();
+            jsonResponse = readInputStream(inputStream);
 
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
+            urlConnection.disconnect();
+
             return jsonResponse;
         }
 
         private String readInputStream(InputStream inputStream) throws IOException {
-            String copyTheOutput = null;
             StringBuilder output = new StringBuilder();
             if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
@@ -171,29 +200,31 @@ public class NotificationsFragment extends Fragment {
                 }
             }
 
-            String finalOutput = output.toString();
-            JSONObject parentObject = null;
-            try {
-                parentObject = new JSONObject(finalOutput);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//            JSONObject parentObject;
+//            JSONArray dataArray;
+//
+//            try {
+//                parentObject = new JSONObject(output.toString());
+//                dataArray = parentObject.getJSONArray("data");
+//                for (int i = 0; i < 96; i++) {
+//                    countryList[i] = dataArray.getJSONObject(i).getString("country");
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
 
-            try {
-                String IP = parentObject.getString("ip");
-                copyTheOutput = IP;
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return copyTheOutput;
+            return output.toString();
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            myIP = s;
+            test.setText(s);
+//            test.setText(countryList.toString());
+//            androidx.appcompat.widget.SearchView.SearchAutoComplete searchAutoComplete = countrySearch.findViewById(R.id.country_search);
+//            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_dropdown_item_1line,countryList);
+//            searchAutoComplete.setAdapter(dataAdapter);
         }
     }
-
 }
+

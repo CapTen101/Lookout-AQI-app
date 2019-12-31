@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
             String jsonResponse = "";
             HttpURLConnection urlConnection = null;
             InputStream inputStream = null;
-            try {
+
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.setRequestProperty("Authorization", "Token 2e9072a007f0fcd23d80fc5537a5c174bee9ff47");
@@ -95,13 +95,6 @@ public class HomeFragment extends Fragment {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readInputStream(inputStream);
 
-            } catch (IOException e) {
-
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
             return jsonResponse;
         }
 
@@ -168,23 +161,16 @@ public class HomeFragment extends Fragment {
             String jsonResponse = "";
             HttpURLConnection urlConnection = null;
             InputStream inputStream = null;
-            try {
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.setRequestProperty("Authorization", "Token 2e9072a007f0fcd23d80fc5537a5c174bee9ff47");
-                urlConnection.setRequestProperty("Content-Type", "application/json");
-                urlConnection.connect();
 
-                inputStream = urlConnection.getInputStream();
-                jsonResponse = readInputStream(inputStream);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestProperty("Authorization", "Token 2e9072a007f0fcd23d80fc5537a5c174bee9ff47");
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.connect();
 
-            } catch (IOException e) {
+            inputStream = urlConnection.getInputStream();
+            jsonResponse = readInputStream(inputStream);
 
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
             return jsonResponse;
         }
 

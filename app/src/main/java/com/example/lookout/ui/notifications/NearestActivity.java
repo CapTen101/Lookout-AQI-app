@@ -33,11 +33,11 @@ public class NearestActivity extends AppCompatActivity {
     private String weatherIconCode;
     private String category;
     private double temperature;
-    private double pressure;
+    private int pressure;
     private double humidity;
     private double windSpeed;
     private double windDirection;
-    private double aqi;
+    private int aqi;
     private double cityLatitude;
     private double cityLongitude;
     private TextView City;
@@ -50,14 +50,15 @@ public class NearestActivity extends AppCompatActivity {
     private TextView WindDirection;
     private TextView Aqi;
     private TextView Category;
+    private TextView WeatherText;
     private ImageView WeatherIcon;
     private ImageView Face;
     private ImageView OtherSideFaceColor;
+    private ImageView AtmosphereCardColor;
     private ImageView SuggestionIcon1;
     private ImageView SuggestionIcon2;
     private ImageView SuggestionIcon3;
     private ImageView SuggestionIcon4;
-
     private static final String MY_IP_URL = "https://api.ipify.org?format=json";
     private static final String MY_NEAREST_URL = "https://api.airvisual.com/v2/nearest_city?key=9a11661d-a1a4-4629-8030-3669adaade7d";
 
@@ -76,10 +77,11 @@ public class NearestActivity extends AppCompatActivity {
         City = findViewById(R.id.city_value);
         State = findViewById(R.id.state_value);
         Country = findViewById(R.id.country_value);
-
         WeatherIcon = findViewById(R.id.weather_icon);
+        WeatherText = findViewById(R.id.weather_text);
         Face = findViewById(R.id.ic_face);
         OtherSideFaceColor = findViewById(R.id.other_side_face_color);
+        AtmosphereCardColor = findViewById(R.id.atmosphere_card_color);
         SuggestionIcon1 = findViewById(R.id.suggestionIcon1);
         SuggestionIcon2 = findViewById(R.id.suggestionIcon2);
         SuggestionIcon3 = findViewById(R.id.suggestionIcon3);
@@ -97,7 +99,7 @@ public class NearestActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(URL... urls) {
 
-            URL url = null;
+            URL url;
             try {
                 url = new URL(MY_IP_URL);
             } catch (MalformedURLException exception) {
@@ -115,29 +117,20 @@ public class NearestActivity extends AppCompatActivity {
         }
 
         private String makeHttpRequest(URL url) throws IOException {
-            String jsonResponse = "";
-            HttpURLConnection urlConnection = null;
-            InputStream inputStream = null;
-            try {
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.connect();
+            String jsonResponse;
+            HttpURLConnection urlConnection;
+            InputStream inputStream;
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+            inputStream = urlConnection.getInputStream();
+            jsonResponse = readInputStream(inputStream);
+            urlConnection.disconnect();
 
-                inputStream = urlConnection.getInputStream();
-                jsonResponse = readInputStream(inputStream);
-
-            } catch (IOException e) {
-
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
             return jsonResponse;
         }
 
         private String readInputStream(InputStream inputStream) throws IOException {
-            String copyTheOutput = null;
             StringBuilder output = new StringBuilder();
             if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
@@ -189,8 +182,8 @@ public class NearestActivity extends AppCompatActivity {
 
         private String makeHttpRequest(URL url) throws IOException {
             String jsonResponse;
-            HttpURLConnection urlConnection = null;
-            InputStream inputStream = null;
+            HttpURLConnection urlConnection;
+            InputStream inputStream;
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("x-forwarded-for", myIP);
@@ -235,7 +228,7 @@ public class NearestActivity extends AppCompatActivity {
                 currentObject = dataObject.getJSONObject("current");
                 weatherObject = currentObject.getJSONObject("weather");
                 temperature = weatherObject.getDouble("tp");
-                pressure = weatherObject.getDouble("pr");
+                pressure = weatherObject.getInt("pr");
                 humidity = weatherObject.getDouble("hu");
                 windSpeed = weatherObject.getDouble("ws");
                 windDirection = weatherObject.getDouble("wd");
@@ -249,6 +242,7 @@ public class NearestActivity extends AppCompatActivity {
                     Face.setImageResource(R.drawable.ic_face_green);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_green));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_green));
+                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_green));
                     SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_green);
                     SuggestionIcon2.setImageResource(R.drawable.ic_health_window_green);
                     SuggestionIcon3.setVisibility(View.INVISIBLE);
@@ -258,6 +252,7 @@ public class NearestActivity extends AppCompatActivity {
                     Face.setImageResource(R.drawable.ic_face_yellow);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
+                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
                     SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_green);
                     SuggestionIcon2.setImageResource(R.drawable.ic_health_window_green);
                     SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
@@ -267,13 +262,14 @@ public class NearestActivity extends AppCompatActivity {
                     Face.setImageResource(R.drawable.ic_face_orange);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_orange));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
+                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
                 } else if ((aqi > 150) && (aqi <= 200)) {
                     category = getString(R.string.unhealthy);
                     Face.setImageResource(R.drawable.ic_face_red);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_red));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
+                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
                     SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
-//                    SuggestionIcon2.setImageResource(R.drawable.ic_health_window_red);
                     SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
                     SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
                 } else if ((aqi > 200) && (aqi <= 300)) {
@@ -281,8 +277,8 @@ public class NearestActivity extends AppCompatActivity {
                     Face.setImageResource(R.drawable.ic_face_maroon);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
+                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
                     SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
-//                    SuggestionIcon2.setImageResource(R.drawable.ic_health_window_red);
                     SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
                     SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
                 } else if (aqi > 300) {
@@ -290,37 +286,11 @@ public class NearestActivity extends AppCompatActivity {
                     Face.setImageResource(R.drawable.ic_face_purple);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_purple));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
+                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
                     SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
-//                    SuggestionIcon2.setImageResource(R.drawable.ic_health_window_red);
                     SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
                     SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
                 }
-
-//                if (weatherIconCode == "01d") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_01d);
-//                } else if (weatherIconCode == "01n") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_01n);
-//                } else if (weatherIconCode == "02d") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_02d);
-//                } else if (weatherIconCode == "02n") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_02n);
-//                } else if (weatherIconCode == "03d") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_03d);
-//                } else if (weatherIconCode == "04d") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_04d);
-//                } else if (weatherIconCode == "09d") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_09d);
-//                } else if (weatherIconCode == "10d") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_10d);
-//                } else if (weatherIconCode == "10n") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_10n);
-//                } else if (weatherIconCode == "11d") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_11d);
-//                } else if (weatherIconCode == "13d") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_13d);
-//                } else if (weatherIconCode == "50n") {
-//                    WeatherIcon.setImageResource(R.drawable.ic_50d);
-//                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -341,34 +311,66 @@ public class NearestActivity extends AppCompatActivity {
             Humidity.setText("" + humidity + "%");
             WindSpeed.setText("" + windSpeed + " m/s");
             WindDirection.setText("" + windDirection + "° due N");
-//            WeatherIcon.setImageResource(R.drawable.ic_50d);
 
-            if (weatherIconCode == "01d") {
-                WeatherIcon.setImageResource(R.drawable.ic_01d);
-            } else if (weatherIconCode == "01n") {
-                WeatherIcon.setImageResource(R.drawable.ic_01n);
-            } else if (weatherIconCode == "02d") {
-                WeatherIcon.setImageResource(R.drawable.ic_02d);
-            } else if (weatherIconCode == "02n") {
-                WeatherIcon.setImageResource(R.drawable.ic_02n);
-            } else if (weatherIconCode == "03d") {
-                WeatherIcon.setImageResource(R.drawable.ic_03d);
-            } else if (weatherIconCode == "04d") {
-                WeatherIcon.setImageResource(R.drawable.ic_04d);
-            } else if (weatherIconCode == "09d") {
-                WeatherIcon.setImageResource(R.drawable.ic_09d);
-            } else if (weatherIconCode == "10d") {
-                WeatherIcon.setImageResource(R.drawable.ic_10d);
-            } else if (weatherIconCode == "10n") {
-                WeatherIcon.setImageResource(R.drawable.ic_10n);
-            } else if (weatherIconCode == "11d") {
-                WeatherIcon.setImageResource(R.drawable.ic_11d);
-            } else if (weatherIconCode == "13d") {
-                WeatherIcon.setImageResource(R.drawable.ic_13d);
-            } else if (weatherIconCode == "50n") {
-                WeatherIcon.setImageResource(R.drawable.ic_50d);
+            if (weatherIconCode.equals("")) {
+
             }
 
+            if (weatherIconCode.equals("01d")) {
+                WeatherIcon.setImageResource(R.drawable.ic_01d);
+                WeatherText.setText("Clear Sky(day)");
+            } else if (weatherIconCode.equals("01n")) {
+                WeatherIcon.setImageResource(R.drawable.ic_01n);
+                WeatherText.setText("Clear Sky(night)");
+            } else if (weatherIconCode.equals("02d")) {
+                WeatherIcon.setImageResource(R.drawable.ic_02d);
+                WeatherText.setText("Few Clouds(day)");
+            } else if (weatherIconCode.equals("02n")) {
+                WeatherIcon.setImageResource(R.drawable.ic_02n);
+                WeatherText.setText("Few Couds(night)");
+            } else if (weatherIconCode.equals("03d")) {
+                WeatherIcon.setImageResource(R.drawable.ic_03d);
+                WeatherText.setText("Scattered Clouds (day time)");
+            } else if (weatherIconCode.equals("03n")) {
+                WeatherIcon.setImageResource(R.drawable.ic_03d);
+                WeatherText.setText("Scattered Clouds (night time)");
+            } else if (weatherIconCode.equals("04d")) {
+                WeatherIcon.setImageResource(R.drawable.ic_04d);
+                WeatherText.setText("Broken Clouds (day time)");
+            } else if (weatherIconCode.equals("04n")) {
+                WeatherIcon.setImageResource(R.drawable.ic_04d);
+                WeatherText.setText("Broken Clouds (night time)");
+            } else if (weatherIconCode.equals("09d")) {
+                WeatherIcon.setImageResource(R.drawable.ic_09d);
+                WeatherText.setText("Shower Rain (day time)");
+            } else if (weatherIconCode.equals("09n")) {
+                WeatherIcon.setImageResource(R.drawable.ic_09d);
+                WeatherText.setText("Shower Rain (night time)");
+            } else if (weatherIconCode.equals("10d")) {
+                WeatherIcon.setImageResource(R.drawable.ic_10d);
+                WeatherText.setText("Rain (day time)");
+            } else if (weatherIconCode.equals("10n")) {
+                WeatherIcon.setImageResource(R.drawable.ic_10n);
+                WeatherText.setText("Rain (night time)");
+            } else if (weatherIconCode.equals("11d")) {
+                WeatherIcon.setImageResource(R.drawable.ic_11d);
+                WeatherText.setText("Thunderstorm (day time)");
+            } else if (weatherIconCode.equals("11n")) {
+                WeatherIcon.setImageResource(R.drawable.ic_11d);
+                WeatherText.setText("Thunderstorm (night time)");
+            } else if (weatherIconCode.equals("13d")) {
+                WeatherIcon.setImageResource(R.drawable.ic_13d);
+                WeatherText.setText("Snow (day time)");
+            } else if (weatherIconCode.equals("13n")) {
+                WeatherIcon.setImageResource(R.drawable.ic_13d);
+                WeatherText.setText("Snow (night time)");
+            } else if (weatherIconCode.equals("50n")) {
+                WeatherIcon.setImageResource(R.drawable.ic_50d);
+                WeatherText.setText("Mist(night time)");
+            } else if (weatherIconCode.equals("50d")) {
+                WeatherIcon.setImageResource(R.drawable.ic_50d);
+                WeatherText.setText("Mist(day time)");
+            }
 
         }
 
