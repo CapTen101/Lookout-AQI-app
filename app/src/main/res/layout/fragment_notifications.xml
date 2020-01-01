@@ -1,189 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/relative_layout"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:alpha="0.1"
+        android:scaleType="fitXY"
+        android:src="@drawable/map_tile_background" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0.1"
-            android:scaleType="fitXY"
-            android:src="@drawable/map_tile_background" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/nearest_data_button"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="19dp"
-            android:background="@color/app_green"
-            android:shadowColor="@android:color/darker_gray"
-            android:text="Click here for nearest city data"
-            android:textSize="17sp" />
-
-        <SearchView
-            android:id="@+id/country_search"
+        <RelativeLayout
+            android:id="@+id/relative_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/nearest_data_button"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search your country here" />
+            android:orientation="vertical">
 
-        <SearchView
-            android:id="@+id/state_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/country_search"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search your state here" />
-
-        <SearchView
-            android:id="@+id/city_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/state_search"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search your city here" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/aqi_card"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/city_search"
-            android:layout_marginTop="60dp"
-            android:clickable="true">
+            <Button
+                android:id="@+id/nearest_data_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="19dp"
+                android:background="@color/app_green"
+                android:shadowColor="@android:color/darker_gray"
+                android:text="Click here for nearest city data"
+                android:textSize="17sp" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/country_search_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nearest_data_button"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/search_icon" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/country_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nearest_data_button"
+                    android:layout_weight="9"
+                    android:completionThreshold="1"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/darker_gray" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/state_search_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/country_search_layout"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/search_icon" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/state_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nearest_data_button"
+                    android:layout_weight="9"
+                    android:completionThreshold="1"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/darker_gray" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/city_search_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/state_search_layout"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/search_icon" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/city_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nearest_data_button"
+                    android:layout_weight="9"
+                    android:completionThreshold="1"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/darker_gray" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/aqi_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="9dp">
+                android:layout_below="@id/city_search_layout"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardCornerRadius="10dp">
 
-                <RelativeLayout
-                    android:id="@+id/layout_left"
-                    android:layout_width="100dp"
-                    android:layout_height="170dp">
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="9dp">
 
                     <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@color/landscape_grey"
-                        android:orientation="horizontal">
+                        android:id="@+id/layout_left"
+                        android:layout_width="100dp"
+                        android:layout_height="170dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@color/landscape_grey"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/weather_icon"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:src="@drawable/ic_01d" />
+
+                            <TextView
+                                android:id="@+id/temperature"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="2dp"
+                                android:text="--°"
+                                android:textAlignment="center"
+                                android:textSize="27sp" />
+
+                        </RelativeLayout>
 
                         <ImageView
-                            android:id="@+id/weather_icon"
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:src="@drawable/ic_01d" />
-
-                        <TextView
-                            android:id="@+id/temperature"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="2dp"
-                            android:text="--°"
-                            android:textAlignment="center"
-                            android:textSize="27sp" />
+                            android:id="@+id/list_image"
+                            android:layout_width="100dp"
+                            android:layout_height="130dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/app_green"
+                            android:paddingTop="9dp"
+                            android:paddingBottom="9dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_face_green" />
 
                     </RelativeLayout>
 
-                    <ImageView
-                        android:id="@+id/list_image"
-                        android:layout_width="100dp"
-                        android:layout_height="130dp"
-                        android:layout_alignParentBottom="true"
-                        android:background="@color/app_green"
-                        android:paddingTop="9dp"
-                        android:paddingBottom="9dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_face_green" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white">
 
 
-                    <TextView
-                        android:id="@+id/city"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:text="---"
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:text="---"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/state"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/city"
-                        android:layout_marginStart="15dp"
-                        android:text="--" />
+                        <TextView
+                            android:id="@+id/state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/city"
+                            android:layout_marginStart="15dp"
+                            android:text="--" />
 
-                    <TextView
-                        android:id="@+id/country"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/state"
-                        android:layout_marginStart="15dp"
-                        android:text="--" />
+                        <TextView
+                            android:id="@+id/country"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/state"
+                            android:layout_marginStart="15dp"
+                            android:text="--" />
 
 
-                    <TextView
-                        android:id="@+id/aqi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/country"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/ruluko_regular"
-                        android:text="---"
-                        android:textColor="@android:color/black"
-                        android:textSize="60sp" />
+                        <TextView
+                            android:id="@+id/aqi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/country"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/ruluko_regular"
+                            android:text="---"
+                            android:textColor="@android:color/black"
+                            android:textSize="60sp" />
 
-                    <TextView
-                        android:id="@+id/us_aqi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/aqi"
-                        android:layout_alignEnd="@id/aqi"
-                        android:text="@string/us_aqi" />
+                        <TextView
+                            android:id="@+id/us_aqi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/aqi"
+                            android:layout_alignEnd="@id/aqi"
+                            android:text="@string/us_aqi" />
 
-                    <TextView
-                        android:id="@+id/category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:background="@color/app_green"
-                        android:fontFamily="@font/ruluko_regular"
-                        android:gravity="center_horizontal"
-                        android:text="---"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/black"
-                        android:textSize="28.5sp" />
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/app_green"
+                            android:fontFamily="@font/ruluko_regular"
+                            android:gravity="center_horizontal"
+                            android:text="---"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/black"
+                            android:textSize="28.5sp" />
+                    </RelativeLayout>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.cardview.widget.CardView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/testyoyo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/aqi_card"
-            android:text="yoyoyoyo" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/testyoyo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/aqi_card"
+                android:text="yoyoyoyo" />
+        </RelativeLayout>
 
-</ScrollView>
+    </ScrollView>
+</RelativeLayout>
