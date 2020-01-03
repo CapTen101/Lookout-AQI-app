@@ -143,13 +143,13 @@
 
                             <TextView
                                 android:id="@+id/temperature_value"
-                                android:layout_width="40dp"
+                                android:layout_width="60dp"
                                 android:layout_height="match_parent"
                                 android:layout_alignParentEnd="true"
-                                android:layout_marginEnd="2dp"
+                                android:layout_marginEnd="0dp"
                                 android:text="--"
                                 android:textAlignment="center"
-                                android:textSize="22sp" />
+                                android:textSize="20sp" />
 
                         </RelativeLayout>
 
@@ -244,12 +244,12 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/testyoyo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/aqi_card"
-                android:text="yoyoyoyo" />
+<!--            <TextView-->
+<!--                android:id="@+id/testyoyo"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/aqi_card"-->
+<!--                android:text="yoyoyoyo" />-->
         </RelativeLayout>
 
     </ScrollView>

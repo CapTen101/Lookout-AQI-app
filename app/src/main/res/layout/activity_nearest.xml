@@ -121,18 +121,17 @@
 
                     <TextView
                         android:id="@+id/category"
-                        android:layout_width="wrap_content"
+                        android:layout_width="121dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="4dp"
                         android:fontFamily="@font/ruluko_regular"
                         android:gravity="center_horizontal"
-                        android:justificationMode="inter_word"
+                        android:layout_centerVertical="true"
                         android:text="---"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
-                        android:textSize="28.5sp" />
+                        android:textSize="25sp" />
 
                 </RelativeLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -151,7 +150,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="11.5dp"
+                android:layout_margin="9.5dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -159,7 +158,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_health_airpurifier_red" />
+                    android:src="@drawable/ic_health_sport_green" />
 
                 <ImageView
                     android:id="@+id/suggestionIcon2"
@@ -173,14 +172,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_health_window_green" />
+                    android:src="@drawable/ic_health_mask_red" />
 
                 <ImageView
                     android:id="@+id/suggestionIcon4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_health_sport_red" />
+                    android:src="@drawable/ic_health_airpurifier_red" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

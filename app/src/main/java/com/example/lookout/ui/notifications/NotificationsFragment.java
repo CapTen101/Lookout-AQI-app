@@ -47,7 +47,7 @@ public class NotificationsFragment extends Fragment {
     private AutoCompleteTextView countrySearch;
     private AutoCompleteTextView stateSearch;
     private AutoCompleteTextView citySearch;
-    private TextView test;
+//    private TextView test;
     private TextView City;
     private TextView State;
     private TextView Country;
@@ -104,7 +104,7 @@ public class NotificationsFragment extends Fragment {
         stateSearch.setHint("Search your State here");
         citySearch = root.findViewById(R.id.city_search);
         citySearch.setHint("Search your City here");
-        test = root.findViewById(R.id.testyoyo);
+//        test = root.findViewById(R.id.testyoyo);
 
         COUNTRYHttpRequest requestCountry = new COUNTRYHttpRequest();
         requestCountry.execute();
@@ -264,7 +264,7 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            test.setText(s);
+//            test.setText(s);
         }
 
         private String makeHttpRequest(URL url) throws IOException {
@@ -339,7 +339,7 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            test.setText(s);
+//            test.setText(s);
         }
 
         private String makeHttpRequest(URL url) throws IOException {

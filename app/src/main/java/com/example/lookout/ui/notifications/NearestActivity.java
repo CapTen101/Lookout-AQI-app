@@ -237,60 +237,6 @@ public class NearestActivity extends AppCompatActivity {
                 pollutionObject = currentObject.getJSONObject("pollution");
                 aqi = pollutionObject.getInt("aqius");
 
-                if ((aqi > 0) && (aqi <= 50)) {
-                    category = getString(R.string.good);
-                    Face.setImageResource(R.drawable.ic_face_green);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_green));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_green));
-                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_green));
-                    SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_green);
-                    SuggestionIcon2.setImageResource(R.drawable.ic_health_window_green);
-                    SuggestionIcon3.setVisibility(View.INVISIBLE);
-                    SuggestionIcon4.setVisibility(View.INVISIBLE);
-                } else if ((aqi > 50) && (aqi <= 100)) {
-                    category = getString(R.string.moderate);
-                    Face.setImageResource(R.drawable.ic_face_yellow);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
-                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
-                    SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_green);
-                    SuggestionIcon2.setImageResource(R.drawable.ic_health_window_green);
-                    SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
-                    SuggestionIcon4.setVisibility(View.INVISIBLE);
-                } else if ((aqi > 100) && (aqi <= 150)) {
-                    category = getString(R.string.unhealhy_for_sensitive_groups);
-                    Face.setImageResource(R.drawable.ic_face_orange);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_orange));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
-                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
-                } else if ((aqi > 150) && (aqi <= 200)) {
-                    category = getString(R.string.unhealthy);
-                    Face.setImageResource(R.drawable.ic_face_red);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_red));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
-                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
-                    SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
-                    SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
-                    SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
-                } else if ((aqi > 200) && (aqi <= 300)) {
-                    category = getString(R.string.very_unhealthy);
-                    Face.setImageResource(R.drawable.ic_face_maroon);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
-                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
-                    SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
-                    SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
-                    SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
-                } else if (aqi > 300) {
-                    category = getString(R.string.hazardous);
-                    Face.setImageResource(R.drawable.ic_face_purple);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_purple));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
-                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
-                    SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
-                    SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
-                    SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
-                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -311,6 +257,68 @@ public class NearestActivity extends AppCompatActivity {
             Humidity.setText("" + humidity + "%");
             WindSpeed.setText("" + windSpeed + " m/s");
             WindDirection.setText("" + windDirection + "° due N");
+
+            if ((aqi > 0) && (aqi <= 50)) {
+                category = getString(R.string.good);
+                Face.setImageResource(R.drawable.ic_face_green);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_green));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_green));
+                AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_green));
+                SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_green);
+                SuggestionIcon2.setImageResource(R.drawable.ic_health_window_green);
+                SuggestionIcon3.setVisibility(View.GONE);
+                SuggestionIcon4.setVisibility(View.GONE);
+            } else if ((aqi > 50) && (aqi <= 100)) {
+                category = getString(R.string.moderate);
+                Face.setImageResource(R.drawable.ic_face_yellow);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
+                AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
+                SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_orange);
+                SuggestionIcon2.setImageResource(R.drawable.ic_health_window_green);
+                SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_orange);
+                SuggestionIcon4.setVisibility(View.GONE);
+            } else if ((aqi > 100) && (aqi <= 150)) {
+                category = getString(R.string.unhealhy_for_sensitive_groups);
+                Face.setImageResource(R.drawable.ic_face_orange);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_orange));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
+                AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
+                SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
+                SuggestionIcon2.setImageResource(R.drawable.ic_health_window_red);
+                SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_orange);
+                SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
+            } else if ((aqi > 150) && (aqi <= 200)) {
+                category = getString(R.string.unhealthy);
+                Face.setImageResource(R.drawable.ic_face_red);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_red));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
+                AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
+                SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
+                SuggestionIcon2.setImageResource(R.drawable.ic_health_window_red);
+                SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
+                SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
+            } else if ((aqi > 200) && (aqi <= 300)) {
+                category = getString(R.string.very_unhealthy);
+                Face.setImageResource(R.drawable.ic_face_maroon);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
+                AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
+                SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
+                SuggestionIcon2.setImageResource(R.drawable.ic_health_window_red);
+                SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
+                SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
+            } else if (aqi > 300) {
+                category = getString(R.string.hazardous);
+                Face.setImageResource(R.drawable.ic_face_purple);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_purple));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
+                AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
+                SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
+                SuggestionIcon2.setImageResource(R.drawable.ic_health_window_red);
+                SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
+                SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
+            }
 
             switch (weatherIconCode) {
                 case "01d":
