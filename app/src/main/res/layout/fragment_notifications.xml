@@ -24,12 +24,12 @@
             <Button
                 android:id="@+id/nearest_data_button"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="19dp"
+                android:layout_height="50dp"
+                android:layout_margin="25dp"
                 android:background="@color/app_green"
                 android:shadowColor="@android:color/darker_gray"
                 android:text="Click here for nearest city data"
-                android:textSize="17sp" />
+                android:textSize="16sp" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/country_search_layout"
@@ -50,6 +50,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/nearest_data_button"
+                    android:layout_marginEnd="17dp"
                     android:layout_weight="9"
                     android:completionThreshold="1"
                     android:textAlignment="center"
@@ -61,6 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/country_search_layout"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -75,6 +77,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/nearest_data_button"
+                    android:layout_marginEnd="17dp"
                     android:layout_weight="9"
                     android:completionThreshold="1"
                     android:textAlignment="center"
@@ -86,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/state_search_layout"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -100,6 +104,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/nearest_data_button"
+                    android:layout_marginEnd="17dp"
                     android:layout_weight="9"
                     android:completionThreshold="1"
                     android:textAlignment="center"
@@ -111,9 +116,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/city_search_layout"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginBottom="10dp"
                 android:clickable="true"
                 app:cardCornerRadius="10dp">
@@ -228,28 +233,28 @@
 
                         <TextView
                             android:id="@+id/category"
-                            android:layout_width="wrap_content"
+                            android:layout_width="121dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="10dp"
+                            android:layout_marginEnd="4dp"
                             android:fontFamily="@font/ruluko_regular"
                             android:gravity="center_horizontal"
                             android:text="---"
                             android:textAlignment="center"
                             android:textColor="@android:color/black"
-                            android:textSize="28.5sp" />
+                            android:textSize="25sp" />
                     </RelativeLayout>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
-<!--            <TextView-->
-<!--                android:id="@+id/testyoyo"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/aqi_card"-->
-<!--                android:text="yoyoyoyo" />-->
+            <TextView
+                android:id="@+id/testyoyo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/aqi_card"
+                android:text="testing data goes here..." />
         </RelativeLayout>
 
     </ScrollView>

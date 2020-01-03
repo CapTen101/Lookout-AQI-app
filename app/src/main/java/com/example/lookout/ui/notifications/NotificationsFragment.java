@@ -47,7 +47,7 @@ public class NotificationsFragment extends Fragment {
     private AutoCompleteTextView countrySearch;
     private AutoCompleteTextView stateSearch;
     private AutoCompleteTextView citySearch;
-//    private TextView test;
+    private TextView test;
     private TextView City;
     private TextView State;
     private TextView Country;
@@ -57,11 +57,9 @@ public class NotificationsFragment extends Fragment {
     private ImageView WeatherIcon;
     private ImageView Face;
     private ImageView OtherSideFaceColor;
-//    private ImageView AtmosphereCardColor;
+    private CardView aqiCard;
     ArrayList<String> stateList = new ArrayList<String>(1);
     ArrayList<String> cityList = new ArrayList<String>(1);
-
-
     private final String COUNTRY_LIST_URL = "https://api.airvisual.com/v2/countries?key=9a11661d-a1a4-4629-8030-3669adaade7d";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,7 +74,7 @@ public class NotificationsFragment extends Fragment {
         WeatherIcon = root.findViewById(R.id.weather_icon);
         Face = root.findViewById(R.id.face);
         OtherSideFaceColor = root.findViewById(R.id.other_side_face_color);
-//        AtmosphereCardColor = root.findViewById(R.id.atmosphere_card_color);
+        aqiCard = root.findViewById(R.id.aqi_card);
 
         Button nearestData;
         nearestData = root.findViewById(R.id.nearest_data_button);
@@ -88,23 +86,13 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
-        CardView aqiCard;
-        aqiCard = root.findViewById(R.id.aqi_card);
-        aqiCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentNearest = new Intent(getActivity(), CARDInfo.class);
-                startActivity(intentNearest);
-            }
-        });
-
         countrySearch = root.findViewById(R.id.country_search);
         countrySearch.setHint("Search your Country here");
         stateSearch = root.findViewById(R.id.state_search);
         stateSearch.setHint("Search your State here");
         citySearch = root.findViewById(R.id.city_search);
         citySearch.setHint("Search your City here");
-//        test = root.findViewById(R.id.testyoyo);
+        test = root.findViewById(R.id.testyoyo);
 
         COUNTRYHttpRequest requestCountry = new COUNTRYHttpRequest();
         requestCountry.execute();
@@ -143,7 +131,7 @@ public class NotificationsFragment extends Fragment {
                 myCity = citySearch.getText().toString();
                 SpecificCityRequest requestCity = new SpecificCityRequest();
                 requestCity.execute();
-//                Log.e("places",myCity + myState + myCountry);
+                Log.e("places",myCity + myState + myCountry);
             }
         });
 
@@ -161,7 +149,6 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
-//        Log.e("places",myCity + myState + myCountry);
         return root;
     }
 
@@ -264,7 +251,7 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-//            test.setText(s);
+            test.setText(s);
         }
 
         private String makeHttpRequest(URL url) throws IOException {
@@ -339,7 +326,7 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-//            test.setText(s);
+            test.setText(s);
         }
 
         private String makeHttpRequest(URL url) throws IOException {
@@ -467,37 +454,31 @@ public class NotificationsFragment extends Fragment {
                     Face.setImageResource(R.drawable.ic_face_green);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_green));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_green));
-//                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_green));
                 } else if ((aqi > 50) && (aqi <= 100)) {
                     category = getString(R.string.moderate);
                     Face.setImageResource(R.drawable.ic_face_yellow);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
-//                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
                 } else if ((aqi > 100) && (aqi <= 150)) {
                     category = getString(R.string.unhealhy_for_sensitive_groups);
                     Face.setImageResource(R.drawable.ic_face_orange);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_orange));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
-//                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
                 } else if ((aqi > 150) && (aqi <= 200)) {
                     category = getString(R.string.unhealthy);
                     Face.setImageResource(R.drawable.ic_face_red);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_red));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
-//                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
                 } else if ((aqi > 200) && (aqi <= 300)) {
                     category = getString(R.string.very_unhealthy);
                     Face.setImageResource(R.drawable.ic_face_maroon);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
-//                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
                 } else if (aqi > 300) {
                     category = getString(R.string.hazardous);
                     Face.setImageResource(R.drawable.ic_face_purple);
                     Face.setBackgroundColor(getResources().getColor(R.color.ic_purple));
                     OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
-//                    AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -572,6 +553,19 @@ public class NotificationsFragment extends Fragment {
                     WeatherIcon.setImageResource(R.drawable.ic_50d);
                     break;
             }
+
+            Intent sendData = new Intent(getActivity(), CARDInfo.class);
+
+            aqiCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent cardInfo = new Intent(getActivity(), CARDInfo.class);
+                    cardInfo.putExtra("MY_CITY",myCity);
+                    cardInfo.putExtra("MY_STATE",myState);
+                    cardInfo.putExtra("MY_COUNTRY",myCountry);
+                    startActivity(cardInfo);
+                }
+            });
 
         }
 

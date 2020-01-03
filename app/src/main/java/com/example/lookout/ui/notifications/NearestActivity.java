@@ -247,17 +247,6 @@ public class NearestActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            City.setText("" + myCity);
-            State.setText("" + myState);
-            Country.setText("" + myCountry);
-            Aqi.setText("" + aqi);
-            Category.setText("" + category);
-            Temperature.setText("" + temperature + "°C");
-            Pressure.setText("" + pressure + " hPa");
-            Humidity.setText("" + humidity + "%");
-            WindSpeed.setText("" + windSpeed + " m/s");
-            WindDirection.setText("" + windDirection + "° due N");
-
             if ((aqi > 0) && (aqi <= 50)) {
                 category = getString(R.string.good);
                 Face.setImageResource(R.drawable.ic_face_green);
@@ -394,6 +383,17 @@ public class NearestActivity extends AppCompatActivity {
                     WeatherText.setText("Mist(day time)");
                     break;
             }
+
+            City.setText("" + myCity);
+            State.setText("" + myState);
+            Country.setText("" + myCountry);
+            Aqi.setText("" + aqi);
+            Category.setText("" + category);
+            Temperature.setText("" + temperature + "°C");
+            Pressure.setText("" + pressure + " hPa");
+            Humidity.setText("" + humidity + "%");
+            WindSpeed.setText("" + windSpeed + " m/s");
+            WindDirection.setText("" + windDirection + "° due N");
 
         }
 
