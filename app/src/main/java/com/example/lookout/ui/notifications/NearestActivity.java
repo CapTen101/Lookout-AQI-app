@@ -209,7 +209,7 @@ public class NearestActivity extends AppCompatActivity {
 
             JSONObject parentObject;
             JSONObject dataObject;
-            JSONObject locationObject;
+//            JSONObject locationObject;
 //            JSONArray coordinateArray;
             JSONObject weatherObject;
             JSONObject pollutionObject;
@@ -220,7 +220,7 @@ public class NearestActivity extends AppCompatActivity {
                 myCity = dataObject.getString("city");
                 myState = dataObject.getString("state");
                 myCountry = dataObject.getString("country");
-                locationObject = dataObject.getJSONObject("location");
+//                locationObject = dataObject.getJSONObject("location");
 //                coordinateArray = locationObject.getJSONArray("coordinates");
 //                cityLongitude = coordinateArray.getDouble(0);
 //                cityLatitude = coordinateArray.getDouble(1);
