@@ -6,37 +6,80 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:alpha="0.3"
         android:background="@drawable/map_tile_background"
-        android:scaleType="fitXY"
-        android:alpha="0.25"/>
+        android:scaleType="fitXY" />
 
     <ImageView
+        android:id="@+id/app_logo"
         android:layout_width="133dp"
         android:layout_height="143dp"
-        android:background="@drawable/probable_app_icon"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:id="@+id/app_logo"/>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/probable_app_icon" />
 
     <TextView
+        android:id="@+id/lookout_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lookout_text"
-        android:text="Lookout"
-        android:textSize="60sp"
-        android:fontFamily="@font/rochester_regular"
-        android:textColor="@android:color/black"
-        tools:ignore="HardcodedText"
+        android:layout_below="@id/app_logo"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/app_logo"/>
+        android:fontFamily="@font/rochester_regular"
+        android:text="Lookout"
+        android:textColor="@android:color/black"
+        android:textSize="65sp"
+        tools:ignore="HardcodedText" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/quote_circle"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/lookout_text"
-        android:layout_marginTop="81dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp"
+        android:background="@drawable/quote_circle"
+        android:elevation="5dp" />
 
+    <ProgressBar
+        android:id="@+id/quote_progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="50dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="360dp"
+        android:elevation="5dp"
+        android:indeterminate="true" />
+
+    <ProgressBar
+        android:id="@+id/author_progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="50dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="520dp"
+        android:elevation="5dp"
+        android:indeterminate="true" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="208dp"
+        android:layout_height="33dp"
+        android:layout_alignTop="@id/quote"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="160dp"
+        android:elevation="5dp"
+        android:fontFamily="@font/rosario_regular"
+        android:textSize="25sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/quote"
+        android:layout_width="159dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="360dp"
+        android:elevation="5dp"
+        android:fontFamily="@font/rosario_regular"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
 </RelativeLayout>

@@ -338,6 +338,14 @@
                     android:textColor="@android:color/black"
                     android:textSize="20sp" />
 
+                <ProgressBar
+                    android:id="@+id/nearest_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="200dp"/>
+
                 <ImageView
                     android:id="@+id/weather_icon"
                     android:layout_width="80dp"
@@ -355,6 +363,16 @@
                     android:text="--"
                     android:textColor="@android:color/black"
                     android:textSize="23sp" />
+
+                <Button
+                    android:id="@+id/gotomap"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/weather_text"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/app_green"
+                    android:text="See Above city in map" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 

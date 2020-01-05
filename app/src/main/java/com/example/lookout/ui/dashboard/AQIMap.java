@@ -2,7 +2,6 @@ package com.example.lookout.ui.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -43,8 +42,6 @@ public class AQIMap extends FragmentActivity implements OnMapReadyCallback {
         LongitudeList = receivedata.getDoubleArrayExtra("LONGITUDE_ARRAY");
         LatitudeList = receivedata.getDoubleArrayExtra("LATITUDE_ARRAY");
 
-        Log.e("yoyo", "" + cityList.get(675) + " " + aqiList.get(456)+LongitudeList[677]);
-
         assert LatitudeList != null;
         assert LongitudeList != null;
         for (int i = 0; i < cityList.size(); i++) {
@@ -54,17 +51,17 @@ public class AQIMap extends FragmentActivity implements OnMapReadyCallback {
                 LatLng coordinates = new LatLng(LatitudeList[i],LongitudeList[i]);
 
                 if ((aqi > 0) && (aqi <= 50)) {
-                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + R.string.us_aqi).snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_green_marker42)));
+                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + "US_AQI").snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_green_marker42)));
                 } else if ((aqi > 50) && (aqi <= 100)) {
-                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + R.string.us_aqi).snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_yellow_marker42)));
+                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + "US_AQI").snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_yellow_marker42)));
                 } else if ((aqi > 100) && (aqi <= 150)) {
-                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + R.string.us_aqi).snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_orange_marker42)));
+                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + "US_AQI").snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_orange_marker42)));
                 } else if ((aqi > 150) && (aqi <= 200)) {
-                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + R.string.us_aqi).snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_red_marker42)));
+                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + "US_AQI").snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_red_marker42)));
                 } else if ((aqi > 200) && (aqi <= 300)) {
-                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + R.string.us_aqi).snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_maroon_marker42)));
+                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + "US_AQI").snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_maroon_marker42)));
                 } else if (aqi > 300) {
-                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + R.string.us_aqi).snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_purple_marker42)));
+                    mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + "US_AQI").snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_purple_marker42)));
                 }
             }
         }

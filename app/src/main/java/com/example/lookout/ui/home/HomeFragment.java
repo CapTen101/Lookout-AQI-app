@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,8 @@ public class HomeFragment extends Fragment {
     private HomeFragment homeFragment;
     private TextView mQuoteResult;
     private TextView mAuthorResult;
+    private ProgressBar quoteProgress;
+    private ProgressBar authorProgress;
     private static final String MY_REQUEST_URL = "https://api.paperquotes.com/quotes/?tags=environment";
     private Random rand = new Random();
     int randomIndex = rand.nextInt(5);
@@ -44,6 +47,8 @@ public class HomeFragment extends Fragment {
 
         mQuoteResult = root.findViewById(R.id.quote);
         mAuthorResult = root.findViewById(R.id.author);
+        quoteProgress = root.findViewById(R.id.quote_progress_bar);
+        authorProgress = root.findViewById(R.id.author_progress_bar);
 
         HttpQuoteRequest requestAPIQuote = new HttpQuoteRequest();
         requestAPIQuote.execute();
@@ -78,6 +83,8 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            mQuoteResult.setVisibility(View.VISIBLE);
+            quoteProgress.setVisibility(View.GONE);
             mQuoteResult.setText("\"" + s + "\"");
         }
 
@@ -161,6 +168,8 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            mAuthorResult.setVisibility(View.VISIBLE);
+            authorProgress.setVisibility(View.GONE);
             mAuthorResult.setText(s);
         }
 

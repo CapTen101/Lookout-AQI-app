@@ -1,10 +1,13 @@
 package com.example.lookout.ui.notifications;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,6 +62,8 @@ public class NearestActivity extends AppCompatActivity {
     private ImageView SuggestionIcon2;
     private ImageView SuggestionIcon3;
     private ImageView SuggestionIcon4;
+    private ProgressBar nearestProgress;
+    private Button goToMap;
     private static final String MY_IP_URL = "https://api.ipify.org?format=json";
     private static final String MY_NEAREST_URL = "https://api.airvisual.com/v2/nearest_city?key=9a11661d-a1a4-4629-8030-3669adaade7d";
 
@@ -86,12 +91,15 @@ public class NearestActivity extends AppCompatActivity {
         SuggestionIcon2 = findViewById(R.id.suggestionIcon2);
         SuggestionIcon3 = findViewById(R.id.suggestionIcon3);
         SuggestionIcon4 = findViewById(R.id.suggestionIcon4);
+        nearestProgress = findViewById(R.id.nearest_progress_bar);
 
         IPHttpRequest requestIP = new IPHttpRequest();
         requestIP.execute();
 
         NearestHttpRequest requestNearest = new NearestHttpRequest();
         requestNearest.execute();
+
+        goToMap = findViewById(R.id.gotomap);
     }
 
     public class IPHttpRequest extends AsyncTask<URL, String, String> {
@@ -246,6 +254,8 @@ public class NearestActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
+            nearestProgress.setVisibility(View.GONE);
+
             if ((aqi > 0) && (aqi <= 50)) {
                 category = getString(R.string.good);
                 Face.setImageResource(R.drawable.ic_face_green);
@@ -393,6 +403,20 @@ public class NearestActivity extends AppCompatActivity {
             Humidity.setText("" + humidity + "%");
             WindSpeed.setText("" + windSpeed + " m/s");
             WindDirection.setText("" + windDirection + "° due N");
+
+            goToMap.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sendDataToMap = new Intent(NearestActivity.this, SpecificCityMapActivity.class);
+                    sendDataToMap.putExtra("LONGITUDE", cityLongitude);
+                    sendDataToMap.putExtra("LATITUDE", cityLatitude);
+                    sendDataToMap.putExtra("COUNTRY", myCountry);
+                    sendDataToMap.putExtra("STATE", myState);
+                    sendDataToMap.putExtra("CITY", myCity);
+                    sendDataToMap.putExtra("AQI", aqi);
+                    startActivity(sendDataToMap);
+                }
+            });
 
         }
 
