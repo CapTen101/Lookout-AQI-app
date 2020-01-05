@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lookout.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,8 +38,8 @@ public class NearestActivity extends AppCompatActivity {
     private double windSpeed;
     private double windDirection;
     private int aqi;
-//    private double cityLatitude;
-//    private double cityLongitude;
+    private double cityLatitude;
+    private double cityLongitude;
     private TextView City;
     private TextView State;
     private TextView Country;
@@ -124,7 +125,6 @@ public class NearestActivity extends AppCompatActivity {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
-            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -190,7 +190,6 @@ public class NearestActivity extends AppCompatActivity {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
-            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -209,8 +208,8 @@ public class NearestActivity extends AppCompatActivity {
 
             JSONObject parentObject;
             JSONObject dataObject;
-//            JSONObject locationObject;
-//            JSONArray coordinateArray;
+            JSONObject locationObject;
+            JSONArray coordinateArray;
             JSONObject weatherObject;
             JSONObject pollutionObject;
             JSONObject currentObject;
@@ -220,10 +219,10 @@ public class NearestActivity extends AppCompatActivity {
                 myCity = dataObject.getString("city");
                 myState = dataObject.getString("state");
                 myCountry = dataObject.getString("country");
-//                locationObject = dataObject.getJSONObject("location");
-//                coordinateArray = locationObject.getJSONArray("coordinates");
-//                cityLongitude = coordinateArray.getDouble(0);
-//                cityLatitude = coordinateArray.getDouble(1);
+                locationObject = dataObject.getJSONObject("location");
+                coordinateArray = locationObject.getJSONArray("coordinates");
+                cityLongitude = coordinateArray.getDouble(0);
+                cityLatitude = coordinateArray.getDouble(1);
 
                 currentObject = dataObject.getJSONObject("current");
                 weatherObject = currentObject.getJSONObject("weather");

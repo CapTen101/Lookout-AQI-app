@@ -94,7 +94,6 @@ public class HomeFragment extends Fragment {
 
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
-            urlConnection.disconnect();
 
             return jsonResponse;
         }

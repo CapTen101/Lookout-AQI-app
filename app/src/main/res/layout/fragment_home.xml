@@ -8,11 +8,11 @@
         android:layout_height="fill_parent"
         android:background="@drawable/map_tile_background"
         android:scaleType="fitXY"
-        android:alpha="0.3"/>
+        android:alpha="0.25"/>
 
     <ImageView
-        android:layout_width="153dp"
-        android:layout_height="163dp"
+        android:layout_width="133dp"
+        android:layout_height="143dp"
         android:background="@drawable/probable_app_icon"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/lookout_text"
         android:text="Lookout"
-        android:textSize="65sp"
+        android:textSize="60sp"
         android:fontFamily="@font/rochester_regular"
         android:textColor="@android:color/black"
         tools:ignore="HardcodedText"

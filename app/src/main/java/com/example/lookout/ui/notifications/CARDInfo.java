@@ -100,10 +100,8 @@ public class CARDInfo extends AppCompatActivity {
         protected String doInBackground(URL... urls) {
 
             URL url;
-
             try {
                 final String SPECIFIC_CITY_URL = "https://api.airvisual.com/v2/city?city=" + myCity + "&state=" + myState + "&country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
-
                 url = new URL(SPECIFIC_CITY_URL);
             } catch (MalformedURLException exception) {
                 Log.e("errorTag", "Error with creating URL", exception);
@@ -128,7 +126,6 @@ public class CARDInfo extends AppCompatActivity {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
-            urlConnection.disconnect();
 
             return jsonResponse;
         }

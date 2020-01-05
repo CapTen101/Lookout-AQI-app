@@ -255,6 +255,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/aqi_card"
                 android:text="testing data goes here..." />
+
+            <Button
+                android:id="@+id/mapgoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/testyoyo"
+                android:text="yoyoyo" />
         </RelativeLayout>
 
     </ScrollView>

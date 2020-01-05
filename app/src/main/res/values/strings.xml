@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">LookOUT</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">AQI Map</string>
+    <string name="title_notifications">City Info</string>
     <string name="hazardous">Hazardous</string>
     <string name="unhealthy">Unhealthy</string>
     <string name="good">Good</string>
@@ -15,4 +15,5 @@
     <string name="title_activity_maps">AQI Map</string>
     <string name="title_activity_nearest_aqimaps">Nearest Map</string>
     <string name="title_activity_aqimap">Map</string>
+    <string name="title_activity_specific_city_map">Map</string>
 </resources>

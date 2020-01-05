@@ -38,6 +38,8 @@ public class NotificationsFragment extends Fragment {
 
     private int aqi;
     private int temperature;
+    private double cityLatitude;
+    private double cityLongitude;
     private String myCity;
     private String myState;
     private String myCountry;
@@ -58,8 +60,9 @@ public class NotificationsFragment extends Fragment {
     private ImageView Face;
     private ImageView OtherSideFaceColor;
     private CardView aqiCard;
-    ArrayList<String> stateList = new ArrayList<String>(1);
-    ArrayList<String> cityList = new ArrayList<String>(1);
+    private Button map_button;
+    ArrayList<String> stateList = new ArrayList<>(1);
+    ArrayList<String> cityList = new ArrayList<>(1);
     private final String COUNTRY_LIST_URL = "https://api.airvisual.com/v2/countries?key=9a11661d-a1a4-4629-8030-3669adaade7d";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -131,7 +134,6 @@ public class NotificationsFragment extends Fragment {
                 myCity = citySearch.getText().toString();
                 SpecificCityRequest requestCity = new SpecificCityRequest();
                 requestCity.execute();
-                Log.e("places",myCity + myState + myCountry);
             }
         });
 
@@ -148,6 +150,8 @@ public class NotificationsFragment extends Fragment {
                 cityList.clear();
             }
         });
+
+        map_button = root.findViewById(R.id.mapgoto);
 
         return root;
     }
@@ -189,7 +193,6 @@ public class NotificationsFragment extends Fragment {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
-            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -263,7 +266,6 @@ public class NotificationsFragment extends Fragment {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
-            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -338,7 +340,6 @@ public class NotificationsFragment extends Fragment {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
-            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -407,7 +408,6 @@ public class NotificationsFragment extends Fragment {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
-            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -426,7 +426,8 @@ public class NotificationsFragment extends Fragment {
 
             JSONObject parentObject;
             JSONObject dataObject;
-//            JSONObject locationObject;
+            JSONObject locationObject;
+            JSONArray coordinateArray;
             JSONObject weatherObject;
             JSONObject pollutionObject;
             JSONObject currentObject;
@@ -436,10 +437,10 @@ public class NotificationsFragment extends Fragment {
                 myCity = dataObject.getString("city");
                 myState = dataObject.getString("state");
                 myCountry = dataObject.getString("country");
-//                locationObject = dataObject.getJSONObject("location");
-//                coordinateArray = locationObject.getJSONArray("coordinates");
-//                cityLongitude = coordinateArray.getDouble(0);
-//                cityLatitude = coordinateArray.getDouble(1);
+                locationObject = dataObject.getJSONObject("location");
+                coordinateArray = locationObject.getJSONArray("coordinates");
+                cityLongitude = coordinateArray.getDouble(0);
+                cityLatitude = coordinateArray.getDouble(1);
 
                 currentObject = dataObject.getJSONObject("current");
                 weatherObject = currentObject.getJSONObject("weather");
@@ -554,15 +555,29 @@ public class NotificationsFragment extends Fragment {
                     break;
             }
 
-            Intent sendData = new Intent(getActivity(), CARDInfo.class);
+            map_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sendDataToMap = new Intent(getActivity(), SpecificCityMapActivity.class);
+                    sendDataToMap.putExtra("LONGITUDE", cityLongitude);
+                    sendDataToMap.putExtra("LATITUDE", cityLatitude);
+                    sendDataToMap.putExtra("COUNTRY", myCountry);
+                    sendDataToMap.putExtra("STATE", myState);
+                    sendDataToMap.putExtra("CITY", myCity);
+                    sendDataToMap.putExtra("AQI", aqi);
+                    startActivity(sendDataToMap);
+                }
+            });
+
+            Log.e("places", "" + cityLatitude + cityLongitude + myCountry + myState + myCity + aqi);
 
             aqiCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent cardInfo = new Intent(getActivity(), CARDInfo.class);
-                    cardInfo.putExtra("MY_CITY",myCity);
-                    cardInfo.putExtra("MY_STATE",myState);
-                    cardInfo.putExtra("MY_COUNTRY",myCountry);
+                    cardInfo.putExtra("MY_CITY", myCity);
+                    cardInfo.putExtra("MY_STATE", myState);
+                    cardInfo.putExtra("MY_COUNTRY", myCountry);
                     startActivity(cardInfo);
                 }
             });
