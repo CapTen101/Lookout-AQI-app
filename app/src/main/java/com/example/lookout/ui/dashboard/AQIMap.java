@@ -20,8 +20,8 @@ public class AQIMap extends FragmentActivity implements OnMapReadyCallback {
 
     ArrayList<String> cityList = new ArrayList<>();
     ArrayList<String> aqiList = new ArrayList<>();
-    ArrayList<Integer> LatitudeList = new ArrayList<>();
-    ArrayList<Integer> LongitudeList = new ArrayList<>();
+    double[] LatitudeList = new double[1028];
+    double[] LongitudeList = new double[1028];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +40,10 @@ public class AQIMap extends FragmentActivity implements OnMapReadyCallback {
         Intent receivedata = getIntent();
         cityList = receivedata.getStringArrayListExtra("CITY_ARRAYLIST");
         aqiList = receivedata.getStringArrayListExtra("AQI_ARRAYLIST");
-        LongitudeList = receivedata.getIntegerArrayListExtra("LONGITUDE_ARRAYLIST");
-        LatitudeList = receivedata.getIntegerArrayListExtra("LATITUDE_ARRAYLIST");
+        LongitudeList = receivedata.getDoubleArrayExtra("LONGITUDE_ARRAY");
+        LatitudeList = receivedata.getDoubleArrayExtra("LATITUDE_ARRAY");
 
-        Log.e("yoyo", "" + cityList.get(675) + " " + aqiList.get(456)+LongitudeList.get(677));
+        Log.e("yoyo", "" + cityList.get(675) + " " + aqiList.get(456)+LongitudeList[677]);
 
         assert LatitudeList != null;
         assert LongitudeList != null;
@@ -51,7 +51,7 @@ public class AQIMap extends FragmentActivity implements OnMapReadyCallback {
             if (!(aqiList.get(i).equals("-"))) {
                 int aqi = Integer.parseInt(aqiList.get(i));
 
-                LatLng coordinates = new LatLng(LatitudeList.get(i), LongitudeList.get(i));
+                LatLng coordinates = new LatLng(LatitudeList[i],LongitudeList[i]);
 
                 if ((aqi > 0) && (aqi <= 50)) {
                     mMap.addMarker(new MarkerOptions().position(coordinates).title("" + aqiList.get(i) + " " + R.string.us_aqi).snippet(cityList.get(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_green_marker42)));

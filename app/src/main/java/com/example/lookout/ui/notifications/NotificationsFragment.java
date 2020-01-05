@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,6 +62,9 @@ public class NotificationsFragment extends Fragment {
     private ImageView OtherSideFaceColor;
     private CardView aqiCard;
     private Button map_button;
+    private ProgressBar ProgressBar1;
+    private ProgressBar ProgressBar2;
+    private ProgressBar ProgressBar3;
     ArrayList<String> stateList = new ArrayList<>(1);
     ArrayList<String> cityList = new ArrayList<>(1);
     private final String COUNTRY_LIST_URL = "https://api.airvisual.com/v2/countries?key=9a11661d-a1a4-4629-8030-3669adaade7d";
@@ -78,6 +82,9 @@ public class NotificationsFragment extends Fragment {
         Face = root.findViewById(R.id.face);
         OtherSideFaceColor = root.findViewById(R.id.other_side_face_color);
         aqiCard = root.findViewById(R.id.aqi_card);
+        ProgressBar1 = root.findViewById(R.id.progressBar1);
+        ProgressBar2 = root.findViewById(R.id.progressBar2);
+        ProgressBar3 = root.findViewById(R.id.progressBar3);
 
         Button nearestData;
         nearestData = root.findViewById(R.id.nearest_data_button);
@@ -95,7 +102,6 @@ public class NotificationsFragment extends Fragment {
         stateSearch.setHint("Search your State here");
         citySearch = root.findViewById(R.id.city_search);
         citySearch.setHint("Search your City here");
-        test = root.findViewById(R.id.testyoyo);
 
         COUNTRYHttpRequest requestCountry = new COUNTRYHttpRequest();
         requestCountry.execute();
@@ -106,6 +112,8 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 myCountry = countrySearch.getText().toString();
+
+                ProgressBar2.setVisibility(View.VISIBLE);
 
                 STATEHttpRequest requestState = new STATEHttpRequest();
                 requestState.execute();
@@ -119,6 +127,8 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 myState = stateSearch.getText().toString();
+
+                ProgressBar3.setVisibility(View.VISIBLE);
 
                 CITYHttpRequest requestState = new CITYHttpRequest();
                 requestState.execute();
@@ -182,6 +192,9 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            Log.e("incoming country",countryList[1]);
+            ProgressBar1.setVisibility(View.GONE);
+            countrySearch.setVisibility(View.VISIBLE);
         }
 
         private String makeHttpRequest(URL url) throws IOException {
@@ -254,7 +267,9 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            test.setText(s);
+            Log.e("incoming country",stateList.get(1));
+            ProgressBar2.setVisibility(View.GONE);
+            stateSearch.setVisibility(View.VISIBLE);
         }
 
         private String makeHttpRequest(URL url) throws IOException {
@@ -328,7 +343,9 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            test.setText(s);
+            Log.e("incoming country",cityList.get(1));
+            ProgressBar3.setVisibility(View.GONE);
+            citySearch.setVisibility(View.VISIBLE);
         }
 
         private String makeHttpRequest(URL url) throws IOException {

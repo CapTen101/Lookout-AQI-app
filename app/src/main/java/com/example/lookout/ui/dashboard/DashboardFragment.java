@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -32,9 +33,11 @@ public class DashboardFragment extends Fragment {
 
     ArrayList<String> cityList = new ArrayList<>(1);
     ArrayList<String> aqiList = new ArrayList<>(1);
-    ArrayList<Integer> LatitudeList = new ArrayList<>(1);
-    ArrayList<Integer> LongitudeList = new ArrayList<>(1);
+    double[] LatitudeList = new double[1028];
+    double[] LongitudeList = new double[1028];
     private String COMPLETE_DATA_URL = "https://api.waqi.info/map/bounds/?latlng=-85,-180,85,180&token=58af52459e24f1c64ccc68ce507a40569ddebed6";
+    private Button map_button;
+    private ProgressBar progressBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -42,15 +45,17 @@ public class DashboardFragment extends Fragment {
         AllCitiesRequest requestCountry = new AllCitiesRequest();
         requestCountry.execute();
 
-        Button map_button = root.findViewById(R.id.mapbutton);
+        progressBar = root.findViewById(R.id.progress_bar);
+
+        map_button = root.findViewById(R.id.mapbutton);
         map_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openMap = new Intent(getActivity(), AQIMap.class);
                 openMap.putExtra("CITY_ARRAYLIST", cityList);
                 openMap.putExtra("AQI_ARRAYLIST", aqiList);
-                openMap.putExtra("LONGITUDE_ARRAYLIST", LongitudeList);
-                openMap.putExtra("LATITUDE_ARRAYLIST", LatitudeList);
+                openMap.putExtra("LATITUDE_ARRAY", LatitudeList);
+                openMap.putExtra("LONGITUDE_ARRAY", LongitudeList);
                 startActivity(openMap);
             }
         });
@@ -88,16 +93,18 @@ public class DashboardFragment extends Fragment {
             try {
                 parentObject = new JSONObject(s);
                 dataArray = parentObject.getJSONArray("data");
-                for (int i = 0; i < dataArray.length(); i++) {
+                for (int i = 0; i < 1028; i++) {
                     cityList.add(dataArray.getJSONObject(i).getJSONObject("station").getString("name"));
                     aqiList.add(dataArray.getJSONObject(i).getString("aqi"));
-                    LatitudeList.add(dataArray.getJSONObject(i).getInt("lat"));
-                    LongitudeList.add(dataArray.getJSONObject(i).getInt("lon"));
+                    LatitudeList[i] = dataArray.getJSONObject(i).getDouble("lat");
+                    LongitudeList[i] = dataArray.getJSONObject(i).getDouble("lon");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e("array ready", cityList.get(2) + " " + LatitudeList.get(2) + " " + LongitudeList.get(2));
+            Log.e("array ready", cityList.get(2) + " " + LatitudeList[2] + " " + LongitudeList[2]);
+            progressBar.setVisibility(View.GONE);
+            map_button.setVisibility(View.VISIBLE);
         }
 
         private String makeHttpRequest(URL url) throws IOException {
