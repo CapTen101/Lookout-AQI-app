@@ -50,7 +50,6 @@ public class NotificationsFragment extends Fragment {
     private AutoCompleteTextView countrySearch;
     private AutoCompleteTextView stateSearch;
     private AutoCompleteTextView citySearch;
-    private TextView test;
     private TextView City;
     private TextView State;
     private TextView Country;
@@ -192,7 +191,6 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.e("incoming country",countryList[1]);
             ProgressBar1.setVisibility(View.GONE);
             countrySearch.setVisibility(View.VISIBLE);
         }
@@ -206,6 +204,7 @@ public class NotificationsFragment extends Fragment {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
+            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -267,7 +266,6 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.e("incoming country",stateList.get(1));
             ProgressBar2.setVisibility(View.GONE);
             stateSearch.setVisibility(View.VISIBLE);
         }
@@ -281,6 +279,7 @@ public class NotificationsFragment extends Fragment {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
+            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -343,7 +342,6 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.e("incoming country",cityList.get(1));
             ProgressBar3.setVisibility(View.GONE);
             citySearch.setVisibility(View.VISIBLE);
         }
@@ -357,6 +355,7 @@ public class NotificationsFragment extends Fragment {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
+            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -425,6 +424,7 @@ public class NotificationsFragment extends Fragment {
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             jsonResponse = readInputStream(inputStream);
+            urlConnection.disconnect();
 
             return jsonResponse;
         }
@@ -469,34 +469,16 @@ public class NotificationsFragment extends Fragment {
 
                 if ((aqi > 0) && (aqi <= 50)) {
                     category = getString(R.string.good);
-                    Face.setImageResource(R.drawable.ic_face_green);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_green));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_green));
                 } else if ((aqi > 50) && (aqi <= 100)) {
                     category = getString(R.string.moderate);
-                    Face.setImageResource(R.drawable.ic_face_yellow);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
                 } else if ((aqi > 100) && (aqi <= 150)) {
                     category = getString(R.string.unhealhy_for_sensitive_groups);
-                    Face.setImageResource(R.drawable.ic_face_orange);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_orange));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
                 } else if ((aqi > 150) && (aqi <= 200)) {
                     category = getString(R.string.unhealthy);
-                    Face.setImageResource(R.drawable.ic_face_red);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_red));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
                 } else if ((aqi > 200) && (aqi <= 300)) {
                     category = getString(R.string.very_unhealthy);
-                    Face.setImageResource(R.drawable.ic_face_maroon);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
                 } else if (aqi > 300) {
                     category = getString(R.string.hazardous);
-                    Face.setImageResource(R.drawable.ic_face_purple);
-                    Face.setBackgroundColor(getResources().getColor(R.color.ic_purple));
-                    OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -514,6 +496,38 @@ public class NotificationsFragment extends Fragment {
             Aqi.setText("" + aqi);
             Category.setText("" + category);
             Temperature.setText("" + temperature + "°C");
+
+            if ((aqi > 0) && (aqi <= 50)) {
+                category = getString(R.string.good);
+                Face.setImageResource(R.drawable.ic_face_green);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_green));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_green));
+            } else if ((aqi > 50) && (aqi <= 100)) {
+                category = getString(R.string.moderate);
+                Face.setImageResource(R.drawable.ic_face_yellow);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_yellow));
+            } else if ((aqi > 100) && (aqi <= 150)) {
+                category = getString(R.string.unhealhy_for_sensitive_groups);
+                Face.setImageResource(R.drawable.ic_face_orange);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_orange));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
+            } else if ((aqi > 150) && (aqi <= 200)) {
+                category = getString(R.string.unhealthy);
+                Face.setImageResource(R.drawable.ic_face_red);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_red));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
+            } else if ((aqi > 200) && (aqi <= 300)) {
+                category = getString(R.string.very_unhealthy);
+                Face.setImageResource(R.drawable.ic_face_maroon);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_maroon));
+            } else if (aqi > 300) {
+                category = getString(R.string.hazardous);
+                Face.setImageResource(R.drawable.ic_face_purple);
+                Face.setBackgroundColor(getResources().getColor(R.color.ic_purple));
+                OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
+            }
 
             switch (weatherIconCode) {
                 case "01d":
