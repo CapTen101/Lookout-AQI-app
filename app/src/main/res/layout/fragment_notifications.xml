@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/city_search_layout"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="10dp"
                 android:clickable="true"
@@ -248,7 +248,7 @@
                             android:fontFamily="@font/ruluko_regular"
                             android:text="---"
                             android:textColor="@android:color/black"
-                            android:textSize="60sp" />
+                            android:textSize="45dp" />
 
                         <TextView
                             android:id="@+id/us_aqi"
@@ -264,7 +264,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="4dp"
+                            android:layout_marginEnd="1dp"
                             android:fontFamily="@font/ruluko_regular"
                             android:gravity="center_horizontal"
                             android:text="---"
@@ -282,7 +282,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/aqi_card"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/app_green"
                 android:text="See Above city in map" />
         </RelativeLayout>
