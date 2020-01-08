@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/info_fragment">
 
     <ImageView
         android:layout_width="match_parent"
@@ -50,7 +51,7 @@
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="12dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:src="@drawable/search_icon" />
 
                 <AutoCompleteTextView
@@ -59,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/nearest_data_button"
                     android:layout_marginEnd="17dp"
-                    android:layout_weight="9"
+                    android:layout_weight="9.2"
                     android:completionThreshold="1"
                     android:textAlignment="center"
                     android:textColor="@android:color/darker_gray"
@@ -86,7 +87,7 @@
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="12dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:src="@drawable/search_icon" />
 
                 <AutoCompleteTextView
@@ -95,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/nearest_data_button"
                     android:layout_marginEnd="17dp"
-                    android:layout_weight="9"
+                    android:layout_weight="9.2"
                     android:completionThreshold="1"
                     android:textAlignment="center"
                     android:textColor="@android:color/darker_gray"
@@ -122,7 +123,7 @@
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="12dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:src="@drawable/search_icon" />
 
                 <AutoCompleteTextView
@@ -131,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/nearest_data_button"
                     android:layout_marginEnd="17dp"
-                    android:layout_weight="9"
+                    android:layout_weight="9.2"
                     android:completionThreshold="1"
                     android:textAlignment="center"
                     android:textColor="@android:color/darker_gray"
@@ -278,13 +279,14 @@
 
             <Button
                 android:id="@+id/mapgoto"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_below="@id/aqi_card"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@color/app_green"
-                android:text="See Above city in map" />
+                android:layout_marginTop="30dp"
+                android:background="@drawable/quote_circle"
+                android:text="See Above city in map"
+                android:textAlignment="center" />
         </RelativeLayout>
 
     </ScrollView>

@@ -35,7 +35,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-public class NotificationsFragment extends Fragment {
+public class  NotificationsFragment extends Fragment {
 
     private int aqi;
     private int temperature;
@@ -467,19 +467,6 @@ public class NotificationsFragment extends Fragment {
                 pollutionObject = currentObject.getJSONObject("pollution");
                 aqi = pollutionObject.getInt("aqius");
 
-                if ((aqi > 0) && (aqi <= 50)) {
-                    category = getString(R.string.good);
-                } else if ((aqi > 50) && (aqi <= 100)) {
-                    category = getString(R.string.moderate);
-                } else if ((aqi > 100) && (aqi <= 150)) {
-                    category = getString(R.string.unhealhy_for_sensitive_groups);
-                } else if ((aqi > 150) && (aqi <= 200)) {
-                    category = getString(R.string.unhealthy);
-                } else if ((aqi > 200) && (aqi <= 300)) {
-                    category = getString(R.string.very_unhealthy);
-                } else if (aqi > 300) {
-                    category = getString(R.string.hazardous);
-                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -489,13 +476,6 @@ public class NotificationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
-            City.setText("" + myCity);
-            State.setText("" + myState);
-            Country.setText("" + myCountry);
-            Aqi.setText("" + aqi);
-            Category.setText("" + category);
-            Temperature.setText("" + temperature + "°C");
 
             if ((aqi > 0) && (aqi <= 50)) {
                 category = getString(R.string.good);
@@ -585,6 +565,13 @@ public class NotificationsFragment extends Fragment {
                     WeatherIcon.setImageResource(R.drawable.ic_50d);
                     break;
             }
+
+            City.setText("" + myCity);
+            State.setText("" + myState);
+            Country.setText("" + myCountry);
+            Aqi.setText("" + aqi);
+            Category.setText("" + category);
+            Temperature.setText("" + temperature + "°C");
 
             map_button.setOnClickListener(new View.OnClickListener() {
                 @Override

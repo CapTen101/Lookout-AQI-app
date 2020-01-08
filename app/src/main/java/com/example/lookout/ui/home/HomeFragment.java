@@ -31,7 +31,6 @@ import java.util.Random;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
     private HomeFragment homeFragment;
     private TextView mQuoteResult;
     private TextView mAuthorResult;
@@ -39,10 +38,9 @@ public class HomeFragment extends Fragment {
     private ProgressBar authorProgress;
     private static final String MY_REQUEST_URL = "https://api.paperquotes.com/quotes/?tags=environment";
     private Random rand = new Random();
-    int randomIndex = rand.nextInt(5);
+    private int randomIndex = rand.nextInt(5);
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         mQuoteResult = root.findViewById(R.id.quote);
@@ -175,8 +173,8 @@ public class HomeFragment extends Fragment {
 
         private String makeHttpRequest(URL url) throws IOException {
             String jsonResponse = "";
-            HttpURLConnection urlConnection = null;
-            InputStream inputStream = null;
+            HttpURLConnection urlConnection;
+            InputStream inputStream;
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");

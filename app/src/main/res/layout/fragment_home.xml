@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/app_logo"
-                android:layout_width="133dp"
-                android:layout_height="143dp"
+                android:layout_width="113dp"
+                android:layout_height="123dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/probable_app_icon" />
