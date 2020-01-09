@@ -112,6 +112,10 @@ public class  NotificationsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 myCountry = countrySearch.getText().toString();
 
+                if(countrySearch.getText().toString().equals("United Kingdom")){
+                    myCountry = "UK";
+                }
+
                 ProgressBar2.setVisibility(View.VISIBLE);
 
                 STATEHttpRequest requestState = new STATEHttpRequest();

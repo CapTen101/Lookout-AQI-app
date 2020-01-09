@@ -188,14 +188,14 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/atmosphere_card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="320dp"
             android:layout_below="@id/suggestion_card"
             android:layout_margin="8dp"
             app:cardCornerRadius="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="9dp">
 
                 <ImageView

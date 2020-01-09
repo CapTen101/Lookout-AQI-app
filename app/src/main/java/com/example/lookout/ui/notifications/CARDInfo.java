@@ -87,6 +87,9 @@ public class CARDInfo extends AppCompatActivity {
 
         Intent Receive = getIntent();
         myCountry = Receive.getStringExtra("MY_COUNTRY");
+        if(Receive.getStringExtra("MY_COUNTRY").equals("United Kingdom")){
+            myCountry = "UK";
+        }
         myState = Receive.getStringExtra("MY_STATE");
         myCity = Receive.getStringExtra("MY_CITY");
 
@@ -208,7 +211,7 @@ public class CARDInfo extends AppCompatActivity {
                 Face.setBackgroundColor(getResources().getColor(R.color.ic_orange));
                 OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
                 AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
-                SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
+                SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_orange);
                 SuggestionIcon2.setImageResource(R.drawable.ic_health_window_red);
                 SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_orange);
                 SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);

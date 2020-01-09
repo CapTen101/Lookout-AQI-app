@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.lookout.R;
 
@@ -146,7 +145,7 @@ public class HomeFragment extends Fragment {
         @Override
         protected String doInBackground(URL... urls) {
 
-            URL url = null;
+            URL url;
             try {
                 url = new URL(MY_REQUEST_URL);
             } catch (MalformedURLException exception) {
