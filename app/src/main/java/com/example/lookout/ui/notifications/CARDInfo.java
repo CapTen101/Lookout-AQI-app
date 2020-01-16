@@ -27,38 +27,13 @@ import java.nio.charset.Charset;
 
 public class CARDInfo extends AppCompatActivity {
 
-    private String myCity;
-    private String myState;
-    private String myCountry;
-    private String weatherIconCode;
-    private String category;
-    private double temperature;
-    private int pressure;
-    private double humidity;
-    private double windSpeed;
-    private double windDirection;
-    private int aqi;
+    private String myCity, myState, myCountry, weatherIconCode, category;
+    private double temperature, humidity, windSpeed, windDirection;
+    private int pressure, aqi;
     private double cityLatitude;
     private double cityLongitude;
-    private TextView City;
-    private TextView State;
-    private TextView Country;
-    private TextView Temperature;
-    private TextView Pressure;
-    private TextView Humidity;
-    private TextView WindSpeed;
-    private TextView WindDirection;
-    private TextView Aqi;
-    private TextView Category;
-    private TextView WeatherText;
-    private ImageView WeatherIcon;
-    private ImageView Face;
-    private ImageView OtherSideFaceColor;
-    private ImageView AtmosphereCardColor;
-    private ImageView SuggestionIcon1;
-    private ImageView SuggestionIcon2;
-    private ImageView SuggestionIcon3;
-    private ImageView SuggestionIcon4;
+    private TextView City, State, Country, Temperature, Pressure, Humidity, WindSpeed, WindDirection, Aqi, Category, WeatherText;
+    private ImageView WeatherIcon, Face, OtherSideFaceColor, AtmosphereCardColor, SuggestionIcon1, SuggestionIcon2, SuggestionIcon3, SuggestionIcon4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,89 +225,88 @@ public class CARDInfo extends AppCompatActivity {
             switch (weatherIconCode) {
                 case "01d":
                     WeatherIcon.setImageResource(R.drawable.ic_01d);
-                    WeatherText.setText("Clear Sky(day)");
+                    WeatherText.setText(getResources().getString(R.string.Clear_Sky_Day));
                     break;
                 case "01n":
                     WeatherIcon.setImageResource(R.drawable.ic_01n);
-                    WeatherText.setText("Clear Sky(night)");
+                    WeatherText.setText(getResources().getString(R.string.Clear_Sky_night));
                     break;
                 case "02d":
                     WeatherIcon.setImageResource(R.drawable.ic_02d);
-                    WeatherText.setText("Few Clouds(day)");
+                    WeatherText.setText(getResources().getString(R.string.Few_Clouds_day));
                     break;
                 case "02n":
                     WeatherIcon.setImageResource(R.drawable.ic_02n);
-                    WeatherText.setText("Few Couds(night)");
+                    WeatherText.setText(getResources().getString(R.string.Few_Couds_night));
                     break;
                 case "03d":
                     WeatherIcon.setImageResource(R.drawable.ic_03d);
-                    WeatherText.setText("Scattered Clouds (day time)");
+                    WeatherText.setText(getResources().getString(R.string.Scattered_Clouds_day_time));
                     break;
                 case "03n":
                     WeatherIcon.setImageResource(R.drawable.ic_03d);
-                    WeatherText.setText("Scattered Clouds (night time)");
+                    WeatherText.setText(getResources().getString(R.string.Scattered_Clouds_night_time));
                     break;
                 case "04d":
                     WeatherIcon.setImageResource(R.drawable.ic_04d);
-                    WeatherText.setText("Broken Clouds (day time)");
+                    WeatherText.setText(getResources().getString(R.string.Broken_Clouds_day_time));
                     break;
                 case "04n":
                     WeatherIcon.setImageResource(R.drawable.ic_04d);
-                    WeatherText.setText("Broken Clouds (night time)");
+                    WeatherText.setText(getResources().getString(R.string.Broken_Clouds_night_time));
                     break;
                 case "09d":
                     WeatherIcon.setImageResource(R.drawable.ic_09d);
-                    WeatherText.setText("Shower Rain (day time)");
+                    WeatherText.setText(getResources().getString(R.string.Shower_Rain_day_time));
                     break;
                 case "09n":
                     WeatherIcon.setImageResource(R.drawable.ic_09d);
-                    WeatherText.setText("Shower Rain (night time)");
+                    WeatherText.setText(getResources().getString(R.string.Shower_Rain_night_time));
                     break;
                 case "10d":
                     WeatherIcon.setImageResource(R.drawable.ic_10d);
-                    WeatherText.setText("Rain (day time)");
+                    WeatherText.setText(getResources().getString(R.string.Rain_day_time));
                     break;
                 case "10n":
                     WeatherIcon.setImageResource(R.drawable.ic_10n);
-                    WeatherText.setText("Rain (night time)");
+                    WeatherText.setText(getResources().getString(R.string.Rain_night_time));
                     break;
                 case "11d":
                     WeatherIcon.setImageResource(R.drawable.ic_11d);
-                    WeatherText.setText("Thunderstorm (day time)");
+                    WeatherText.setText(getResources().getString(R.string.Thunderstorm_day_time));
                     break;
                 case "11n":
                     WeatherIcon.setImageResource(R.drawable.ic_11d);
-                    WeatherText.setText("Thunderstorm (night time)");
+                    WeatherText.setText(getResources().getString(R.string.Thunderstorm_night_time));
                     break;
                 case "13d":
                     WeatherIcon.setImageResource(R.drawable.ic_13d);
-                    WeatherText.setText("Snow (day time)");
+                    WeatherText.setText(getResources().getString(R.string.Snow_day_time));
                     break;
                 case "13n":
                     WeatherIcon.setImageResource(R.drawable.ic_13d);
-                    WeatherText.setText("Snow (night time)");
+                    WeatherText.setText(getResources().getString(R.string.Snow_night_time));
                     break;
                 case "50n":
                     WeatherIcon.setImageResource(R.drawable.ic_50d);
-                    WeatherText.setText("Mist(night time)");
+                    WeatherText.setText(getResources().getString(R.string.Mist_night_time));
                     break;
                 case "50d":
                     WeatherIcon.setImageResource(R.drawable.ic_50d);
-                    WeatherText.setText("Mist(day time)");
+                    WeatherText.setText(getResources().getString(R.string.Mist_day_time));
                     break;
             }
 
-            City.setText("" + myCity);
-            State.setText("" + myState);
-            Country.setText("" + myCountry);
-            Aqi.setText("" + aqi);
-            Category.setText("" + category);
-            Temperature.setText("" + temperature + "°C");
-            Pressure.setText("" + pressure + " hPa");
-            Humidity.setText("" + humidity + "%");
-            WindSpeed.setText("" + windSpeed + " m/s");
-            WindDirection.setText("" + windDirection + "° due N");
-
+            City.setText(myCity);
+            State.setText(myState);
+            Country.setText(myCountry);
+            Aqi.setText(String.valueOf(aqi));
+            Category.setText(category);
+            Temperature.setText(temperature + "°C");
+            Pressure.setText(pressure + " hPa");
+            Humidity.setText(humidity + "%");
+            WindSpeed.setText(windSpeed + " m/s");
+            WindDirection.setText(windDirection + "° due N");
         }
 
     }

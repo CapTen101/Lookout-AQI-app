@@ -16,4 +16,23 @@
     <string name="title_activity_nearest_aqimaps">Nearest Map</string>
     <string name="title_activity_aqimap">Map</string>
     <string name="title_activity_specific_city_map">Map</string>
+    <string name="Clear_Sky_Day">Clear Sky(day)</string>
+    <string name="Clear_Sky_night">Clear Sky(night)</string>
+    <string name="Few_Clouds_day">Few Clouds(day)</string>
+    <string name="Few_Couds_night">Few Couds(night)</string>
+    <string name="Scattered_Clouds_day_time">Scattered Clouds (day time)</string>
+    <string name="Scattered_Clouds_night_time">Scattered Clouds (night time)</string>
+    <string name="Broken_Clouds_day_time">Broken Clouds (day time)</string>
+    <string name="Broken_Clouds_night_time">Broken Clouds (night time)</string>
+    <string name="Shower_Rain_day_time">Shower Rain (day time)</string>
+    <string name="Shower_Rain_night_time">Shower Rain (night time)</string>
+    <string name="Rain_day_time">Rain (day time)</string>
+    <string name="Rain_night_time">Rain (night time)</string>
+    <string name="Thunderstorm_day_time">Thunderstorm (day time)</string>
+    <string name="Thunderstorm_night_time">Thunderstorm (night time)</string>
+    <string name="Snow_day_time">Snow (day time)</string>
+    <string name="Snow_night_time">Snow (night time)</string>
+    <string name="Mist_night_time">Mist(night time)</string>
+    <string name="Mist_day_time">Mist(day time)</string>
+
 </resources>
