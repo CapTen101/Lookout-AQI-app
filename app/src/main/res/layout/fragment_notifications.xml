@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/info_fragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/info_fragment">
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="match_parent"
@@ -84,11 +84,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/state_search_icon"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="12dp"
                     android:layout_weight="0.8"
-                    android:src="@drawable/search_icon" />
+                    android:src="@drawable/search_icon"
+                    android:visibility="gone" />
 
                 <AutoCompleteTextView
                     android:id="@+id/state_search"
@@ -100,7 +102,7 @@
                     android:completionThreshold="1"
                     android:textAlignment="center"
                     android:textColor="@android:color/darker_gray"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <ProgressBar
@@ -120,11 +122,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/city_search_icon"
                     android:layout_width="0dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="12dp"
                     android:layout_weight="0.8"
-                    android:src="@drawable/search_icon" />
+                    android:src="@drawable/search_icon"
+                    android:visibility="gone" />
 
                 <AutoCompleteTextView
                     android:id="@+id/city_search"
@@ -136,7 +140,7 @@
                     android:completionThreshold="1"
                     android:textAlignment="center"
                     android:textColor="@android:color/darker_gray"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.cardview.widget.CardView

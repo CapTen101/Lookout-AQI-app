@@ -43,7 +43,7 @@ public class  NotificationsFragment extends Fragment {
     private String[] countryList = new String[96];
     private AutoCompleteTextView countrySearch, stateSearch, citySearch;
     private TextView City, State, Country, Temperature, Aqi, Category;
-    private ImageView WeatherIcon, Face, OtherSideFaceColor;
+    private ImageView WeatherIcon, Face, OtherSideFaceColor, searchIconState, searchIconCity;
     private CardView aqiCard;
     private Button map_button;
     private ProgressBar ProgressBar1, ProgressBar2, ProgressBar3;
@@ -67,6 +67,8 @@ public class  NotificationsFragment extends Fragment {
         ProgressBar1 = root.findViewById(R.id.progressBar1);
         ProgressBar2 = root.findViewById(R.id.progressBar2);
         ProgressBar3 = root.findViewById(R.id.progressBar3);
+        searchIconState = root.findViewById(R.id.state_search_icon);
+        searchIconCity = root.findViewById(R.id.city_search_icon);
 
         Button nearestData;
         nearestData = root.findViewById(R.id.nearest_data_button);
@@ -255,6 +257,7 @@ public class  NotificationsFragment extends Fragment {
             super.onPostExecute(s);
             ProgressBar2.setVisibility(View.GONE);
             stateSearch.setVisibility(View.VISIBLE);
+            searchIconState.setVisibility(View.VISIBLE);
         }
 
         private String makeHttpRequest(URL url) throws IOException {
@@ -331,6 +334,7 @@ public class  NotificationsFragment extends Fragment {
             super.onPostExecute(s);
             ProgressBar3.setVisibility(View.GONE);
             citySearch.setVisibility(View.VISIBLE);
+            searchIconCity.setVisibility(View.VISIBLE);
         }
 
         private String makeHttpRequest(URL url) throws IOException {
