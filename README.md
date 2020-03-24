@@ -25,3 +25,7 @@ a confirmation from the user if the user has the apps installed in the device.
 
 
 ![alt text](https://img.techpowerup.org/200319/aqi-map.jpg "aqi map Screen")
+
+
+# License
+> Lookout is licensed under MIT license.
