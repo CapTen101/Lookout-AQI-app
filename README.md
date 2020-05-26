@@ -1,8 +1,8 @@
 # Lookout
 [![GitHub issues](https://img.shields.io/github/issues/CapTen101/Lookout-AQI-app)](https://github.com/CapTen101/Lookout-AQI-app/issues)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/CapTen101/Lookout-AQI-app/pulls)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/CapTen101/Lookout-AQI-app/blob/master/LICENSE)
 > Pollution display and monitoring Android Project - Season of Code, MDG, IIT Roorkee
 
 Link to the project proposal: `https://drive.google.com/open?id=15wmNysGhOZIHenFqllj3JDDFUlFnq5sZ`
