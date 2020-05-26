@@ -5,7 +5,7 @@
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 > Pollution display and monitoring Android Project - Season of Code, MDG, IIT Roorkee
 
-Link to the proposal: `https://drive.google.com/open?id=15wmNysGhOZIHenFqllj3JDDFUlFnq5sZ`
+Link to the project proposal: `https://drive.google.com/open?id=15wmNysGhOZIHenFqllj3JDDFUlFnq5sZ`
 
 * The app will basically collect info of the user’s location. It will then monitor the pollution levels in the air around the user’s region.
 
