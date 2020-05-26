@@ -1,4 +1,8 @@
 # Lookout
+[![GitHub issues](https://img.shields.io/github/issues/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/issues/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 > Pollution display and monitoring Android Project - Season of Code, MDG, IIT Roorkee
 
 Link to the proposal: `https://drive.google.com/open?id=15wmNysGhOZIHenFqllj3JDDFUlFnq5sZ`
@@ -15,16 +19,7 @@ APIs.
 * Also, if the route diversion is not possible, the app would book a taxi after asking for
 a confirmation from the user if the user has the apps installed in the device.
 
-![alt text](https://img.techpowerup.org/200319/home.jpg "Home Screen")
-
-
-![alt text](https://img.techpowerup.org/200319/delhi.jpg "Delhi Screen")
-
-
-![alt text](https://img.techpowerup.org/200319/china.jpg "China Screen")
-
-
-![alt text](https://img.techpowerup.org/200319/aqi-map.jpg "aqi map Screen")
+<img src="https://img.techpowerup.org/200319/home.jpg" alt="Home Screen" width="235" height="485"/>   <img src="https://img.techpowerup.org/200319/delhi.jpg" alt="Delhi Screen" width="235" height="485"/>   <img src="https://img.techpowerup.org/200319/china.jpg" alt="China Screen" width="235" height="485"/>   <img src="https://img.techpowerup.org/200319/aqi-map.jpg" alt="aqi map Screen" width="235" height="485"/>
 
 
 # License
