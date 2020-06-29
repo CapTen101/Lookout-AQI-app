@@ -7,17 +7,13 @@
 
 Link to the project proposal: `https://drive.google.com/open?id=15wmNysGhOZIHenFqllj3JDDFUlFnq5sZ`
 
-* The app will basically collect info of the user’s location. It will then monitor the pollution levels in the air around the user’s region.
+* The app can basically collect info of the user’s location. It will then monitor the pollution levels in the air around the user’s region using certain APIs which are procuring data from the hardware installed in the cities aroud the world.
 
-* It will contain a map tile. The map tile API can be used to show the real-time Air Quality
-index on a google, bing or openstreet map. It will indicate/mark various locations with
-information about air index.
+* It contain a world map wherein it shows the real-time Air Quality
+Index (Google Maps SDk for Android was used here). It will indicate/mark various locations with
+information about air index using custom markers.
 
-* It would do it by grabbing real time data from various monitoring agencies by using their
-APIs.
-
-* Also, if the route diversion is not possible, the app would book a taxi after asking for
-a confirmation from the user if the user has the apps installed in the device.
+* It can suggest various precautions based on the AQI levels in the air surrounding the user.
 
 <img src="https://img.techpowerup.org/200319/home.jpg" alt="Home Screen" width="235" height="485"/>   <img src="https://img.techpowerup.org/200319/delhi.jpg" alt="Delhi Screen" width="235" height="485"/>   <img src="https://img.techpowerup.org/200319/china.jpg" alt="China Screen" width="235" height="485"/>   <img src="https://img.techpowerup.org/200319/aqi-map.jpg" alt="aqi map Screen" width="235" height="485"/>
 
