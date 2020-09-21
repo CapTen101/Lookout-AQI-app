@@ -1,4 +1,4 @@
-package com.example.lookout.ui.notifications;
+package com.example.lookout.ui.AQISearch;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,23 +23,31 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
-public class CARDInfo extends AppCompatActivity {
+public class CardInfoActivity extends AppCompatActivity {
 
+    // Defining all the views in this activity
     private String myCity, myState, myCountry, weatherIconCode, category;
     private double temperature, humidity, windSpeed, windDirection;
     private int pressure, aqi;
-    private double cityLatitude;
-    private double cityLongitude;
-    private TextView City, State, Country, Temperature, Pressure, Humidity, WindSpeed, WindDirection, Aqi, Category, WeatherText;
-    private ImageView WeatherIcon, Face, OtherSideFaceColor, AtmosphereCardColor, SuggestionIcon1, SuggestionIcon2, SuggestionIcon3, SuggestionIcon4;
+    private double cityLatitude, cityLongitude;
+    private TextView City, State, Country,
+                     Temperature, Pressure, Humidity, WindSpeed, WindDirection, Aqi, Category, WeatherText;
+    private ImageView WeatherIcon, Face, OtherSideFaceColor, AtmosphereCardColor,
+                      SuggestionIcon1, SuggestionIcon2, SuggestionIcon3, SuggestionIcon4;
+    private static String API_KEY;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cardinfo);
 
+        // This contains the API_KEY
+        API_KEY  = getResources().getString(R.string.API_KEY);
+
+        // Inflating all the views with their respective XML layouts
         Temperature = findViewById(R.id.temperature_value);
         Pressure = findViewById(R.id.pressure_value);
         Humidity = findViewById(R.id.humidity_value);
@@ -60,6 +68,9 @@ public class CARDInfo extends AppCompatActivity {
         SuggestionIcon3 = findViewById(R.id.suggestionIcon3);
         SuggestionIcon4 = findViewById(R.id.suggestionIcon4);
 
+        // Receive the Intent here.
+        // The Intent brings the country, state and the city to be searched for
+        // from the AQISearchFragment.
         Intent Receive = getIntent();
         myCountry = Receive.getStringExtra("MY_COUNTRY");
         if(Receive.getStringExtra("MY_COUNTRY").equals("United Kingdom")){
@@ -72,31 +83,47 @@ public class CARDInfo extends AppCompatActivity {
         specificCityRequest.execute();
     }
 
+    // This ASyncTask handles the asynchronous network request sent to the API
     public class SpecificCityRequest extends AsyncTask<URL, String, String> {
 
+        // This method hits the API and gets the response for us.
+        // This is executed first before any other below mentioned functions.
         @Override
         protected String doInBackground(URL... urls) {
 
             URL url;
+
+            // Enclosing the URL Creation in a try-catch
+            // for logging any possible exceptions that might occur during runtime
             try {
-                final String SPECIFIC_CITY_URL = "https://api.airvisual.com/v2/city?city=" + myCity + "&state=" + myState + "&country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
+                final String SPECIFIC_CITY_URL = "https://api.airvisual.com/v2/city?city=" + myCity +
+                                                    "&state=" + myState +
+                                                    "&country=" + myCountry +
+                                                    "&key=" + API_KEY;
                 url = new URL(SPECIFIC_CITY_URL);
             } catch (MalformedURLException exception) {
                 Log.e("errorTag", "Error with creating URL", exception);
                 return null;
             }
 
-            String jsonResponse = "";
+            // Had to initialise empty here
+            // since the compiler was giving error for an uninitialised variable
+            String jsonResponse="";
+
             try {
                 jsonResponse = makeHttpRequest(url);
             } catch (IOException e) {
-                Log.e("errorTag", "Error in request");
+                Log.e("errorTag", "Error in HTTP request");
             }
+
             return jsonResponse;
         }
 
         private String makeHttpRequest(URL url) throws IOException {
+
             String jsonResponse;
+
+            // GET Request
             HttpURLConnection urlConnection;
             InputStream inputStream;
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -111,7 +138,7 @@ public class CARDInfo extends AppCompatActivity {
         private String readInputStream(InputStream inputStream) throws IOException {
             StringBuilder output = new StringBuilder();
             if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 String line = reader.readLine();
                 while (line != null) {
@@ -120,14 +147,13 @@ public class CARDInfo extends AppCompatActivity {
                 }
             }
 
-            JSONObject parentObject;
-            JSONObject dataObject;
-            JSONObject locationObject;
+            // Defining all JSON Objects for the parsing
+            JSONObject parentObject, dataObject, locationObject, weatherObject, pollutionObject, currentObject;
             JSONArray coordinateArray;
-            JSONObject weatherObject;
-            JSONObject pollutionObject;
-            JSONObject currentObject;
+
             try {
+
+                // Parsing the received JSON Objects from the network request and assigning the variables
                 parentObject = new JSONObject(output.toString());
                 dataObject = parentObject.getJSONObject("data");
                 myCity = dataObject.getString("city");
@@ -151,6 +177,8 @@ public class CARDInfo extends AppCompatActivity {
                 aqi = pollutionObject.getInt("aqius");
 
             } catch (JSONException e) {
+
+                // Catch any possible exceptions here
                 e.printStackTrace();
             }
             return output.toString();

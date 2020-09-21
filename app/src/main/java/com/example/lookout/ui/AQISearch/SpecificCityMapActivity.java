@@ -1,4 +1,4 @@
-package com.example.lookout.ui.notifications;
+package com.example.lookout.ui.AQISearch;
 
 import android.content.Intent;
 import android.os.Bundle;

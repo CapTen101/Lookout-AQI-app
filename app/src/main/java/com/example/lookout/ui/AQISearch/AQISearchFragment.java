@@ -1,4 +1,4 @@
-package com.example.lookout.ui.notifications;
+package com.example.lookout.ui.AQISearch;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -35,7 +35,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-public class  NotificationsFragment extends Fragment {
+public class AQISearchFragment extends Fragment {
 
     private int aqi, temperature;
     private double cityLatitude, cityLongitude;
@@ -75,7 +75,7 @@ public class  NotificationsFragment extends Fragment {
         nearestData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentNearest = new Intent(getActivity(), NearestActivity.class);
+                Intent intentNearest = new Intent(getActivity(), NearestCityInfoActivity.class);
                 startActivity(intentNearest);
             }
         });
@@ -583,7 +583,7 @@ public class  NotificationsFragment extends Fragment {
             aqiCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent cardInfo = new Intent(getActivity(), CARDInfo.class);
+                    Intent cardInfo = new Intent(getActivity(), CardInfoActivity.class);
                     cardInfo.putExtra("MY_CITY", myCity);
                     cardInfo.putExtra("MY_STATE", myState);
                     cardInfo.putExtra("MY_COUNTRY", myCountry);

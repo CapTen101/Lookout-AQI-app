@@ -8,7 +8,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.notifications.NearestActivity">
+        tools:context=".ui.AQISearch.NearestCityInfoActivity">
 
         <ImageView
             android:layout_width="match_parent"

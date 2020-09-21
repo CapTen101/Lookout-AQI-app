@@ -34,5 +34,6 @@
     <string name="Snow_night_time">Snow (night time)</string>
     <string name="Mist_night_time">Mist(night time)</string>
     <string name="Mist_day_time">Mist(day time)</string>
+    <string name="API_KEY">9a11661d-a1a4-4629-8030-3669adaade7d</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.example.lookout.ui.dashboard;
+package com.example.lookout.ui.WorldMap;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -29,7 +29,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-public class DashboardFragment extends Fragment {
+public class GoToMapButtonFragment extends Fragment {
 
     ArrayList<String> cityList = new ArrayList<>(1);
     ArrayList<String> aqiList = new ArrayList<>(1);
@@ -51,7 +51,7 @@ public class DashboardFragment extends Fragment {
         map_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openMap = new Intent(getActivity(), AQIMap.class);
+                Intent openMap = new Intent(getActivity(), AQIWorldMapActivity.class);
                 openMap.putExtra("CITY_ARRAYLIST", cityList);
                 openMap.putExtra("AQI_ARRAYLIST", aqiList);
                 openMap.putExtra("LATITUDE_ARRAY", LatitudeList);

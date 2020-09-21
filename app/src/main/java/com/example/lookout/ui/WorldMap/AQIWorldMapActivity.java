@@ -1,4 +1,4 @@
-package com.example.lookout.ui.dashboard;
+package com.example.lookout.ui.WorldMap;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class AQIMap extends FragmentActivity implements OnMapReadyCallback {
+public class AQIWorldMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     ArrayList<String> cityList = new ArrayList<>();
     ArrayList<String> aqiList = new ArrayList<>();

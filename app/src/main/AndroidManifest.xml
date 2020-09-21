@@ -33,17 +33,17 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.notifications.SpecificCityMapActivity"
+            android:name=".ui.AQISearch.SpecificCityMapActivity"
             android:label="@string/title_activity_specific_city_map"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.notifications.CARDInfo"
+            android:name=".ui.AQISearch.CardInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.dashboard.AQIMap"
+            android:name=".ui.WorldMap.AQIWorldMapActivity"
             android:label="@string/title_activity_aqimap" />
         <activity
-            android:name=".ui.notifications.NearestActivity"
+            android:name=".ui.AQISearch.NearestCityInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data

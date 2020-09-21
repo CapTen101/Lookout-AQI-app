@@ -1,4 +1,4 @@
-package com.example.lookout.ui.notifications;
+package com.example.lookout.ui.AQISearch;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -27,7 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-public class NearestActivity extends AppCompatActivity {
+public class NearestCityInfoActivity extends AppCompatActivity {
 
     private String myIP, myCity, myState, myCountry, weatherIconCode, category;
     private double temperature, humidity, windSpeed, windDirection, cityLatitude, cityLongitude;
@@ -379,7 +379,7 @@ public class NearestActivity extends AppCompatActivity {
             goToMap.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent sendDataToMap = new Intent(NearestActivity.this, SpecificCityMapActivity.class);
+                    Intent sendDataToMap = new Intent(NearestCityInfoActivity.this, SpecificCityMapActivity.class);
                     sendDataToMap.putExtra("LONGITUDE", cityLongitude);
                     sendDataToMap.putExtra("LATITUDE", cityLatitude);
                     sendDataToMap.putExtra("COUNTRY", myCountry);
