@@ -1,13 +1,11 @@
-package com.example.lookout.ui.AQISearch;
+package com.example.lookout.Fragment.AQISearch;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,25 +23,32 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
-public class NearestCityInfoActivity extends AppCompatActivity {
+public class CardInfoActivity extends AppCompatActivity {
 
-    private String myIP, myCity, myState, myCountry, weatherIconCode, category;
-    private double temperature, humidity, windSpeed, windDirection, cityLatitude, cityLongitude;
+    // Defining all the views in this activity
+    private String myCity, myState, myCountry, weatherIconCode, category;
+    private double temperature, humidity, windSpeed, windDirection;
     private int pressure, aqi;
-    private TextView City, State, Country, Temperature, Pressure, Humidity, WindSpeed, WindDirection, Aqi, Category, WeatherText;
-    private ImageView WeatherIcon, Face, OtherSideFaceColor, AtmosphereCardColor, SuggestionIcon1, SuggestionIcon2, SuggestionIcon3, SuggestionIcon4;
-    private ProgressBar nearestProgress;
-    private Button goToMap;
-    private static final String MY_IP_URL = "https://api.ipify.org?format=json";
-    private static final String MY_NEAREST_URL = "https://api.airvisual.com/v2/nearest_city?key=9a11661d-a1a4-4629-8030-3669adaade7d";
+    private double cityLatitude, cityLongitude;
+    private TextView City, State, Country,
+                     Temperature, Pressure, Humidity, WindSpeed, WindDirection, Aqi, Category, WeatherText;
+    private ImageView WeatherIcon, Face, OtherSideFaceColor, AtmosphereCardColor,
+                      SuggestionIcon1, SuggestionIcon2, SuggestionIcon3, SuggestionIcon4;
+
+    private static String API_KEY;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nearest);
+        setContentView(R.layout.activity_cardinfo);
 
+        // This contains the API_KEY
+        API_KEY  = getResources().getString(R.string.API_KEY);
+
+        // Inflating all the views with their respective XML layouts
         Temperature = findViewById(R.id.temperature_value);
         Pressure = findViewById(R.id.pressure_value);
         Humidity = findViewById(R.id.humidity_value);
@@ -63,41 +68,69 @@ public class NearestCityInfoActivity extends AppCompatActivity {
         SuggestionIcon2 = findViewById(R.id.suggestionIcon2);
         SuggestionIcon3 = findViewById(R.id.suggestionIcon3);
         SuggestionIcon4 = findViewById(R.id.suggestionIcon4);
-        nearestProgress = findViewById(R.id.nearest_progress_bar);
 
-        IPHttpRequest requestIP = new IPHttpRequest();
-        requestIP.execute();
+        // Receive the Intent here.
+        // The Intent brings the country, state and the city to be searched for
+        // from the AQISearchFragment.
+        Intent Receive = getIntent();
+        myCountry = Receive.getStringExtra("MY_COUNTRY");
 
-        NearestHttpRequest requestNearest = new NearestHttpRequest();
-        requestNearest.execute();
+        // There was some non-uniformity JSON response specifically in case of United Kingdom
+        // Hence setting it manually
+        if(Receive.getStringExtra("MY_COUNTRY").equals("United Kingdom")){
+            myCountry = "UK";
+        }
 
-        goToMap = findViewById(R.id.gotomap);
+        myState = Receive.getStringExtra("MY_STATE");
+        myCity = Receive.getStringExtra("MY_CITY");
+
+        // Execute the GET request
+        SpecificCityRequest specificCityRequest = new SpecificCityRequest();
+        specificCityRequest.execute();
     }
 
-    public class IPHttpRequest extends AsyncTask<URL, String, String> {
+    // This ASyncTask handles the asynchronous network request sent to the API
+    public class SpecificCityRequest extends AsyncTask<URL, String, String> {
 
+        // This method hits the API and gets the response for us.
+        // This is executed first before any other below mentioned functions.
         @Override
         protected String doInBackground(URL... urls) {
 
             URL url;
+
+            // Enclosing the URL Creation in a try-catch
+            // for logging any possible exceptions that might occur during runtime
             try {
-                url = new URL(MY_IP_URL);
+                final String SPECIFIC_CITY_URL = "https://api.airvisual.com/v2/city?city=" + myCity +
+                                                    "&state=" + myState +
+                                                    "&country=" + myCountry +
+                                                    "&key=" + API_KEY;
+                url = new URL(SPECIFIC_CITY_URL);
             } catch (MalformedURLException exception) {
                 Log.e("errorTag", "Error with creating URL", exception);
                 return null;
             }
 
-            String jsonResponse = "";
+            // Had to initialise empty here
+            // since the compiler was giving error for an uninitialised variable
+            String jsonResponse="";
+
             try {
                 jsonResponse = makeHttpRequest(url);
             } catch (IOException e) {
-                Log.e("errorTag", "Error in request");
+                Log.e("errorTag", "Error in HTTP request");
             }
+
             return jsonResponse;
         }
 
+        // This function makes the HTTP request and gets the response
         private String makeHttpRequest(URL url) throws IOException {
+
             String jsonResponse;
+
+            // GET Request
             HttpURLConnection urlConnection;
             InputStream inputStream;
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -109,10 +142,11 @@ public class NearestCityInfoActivity extends AppCompatActivity {
             return jsonResponse;
         }
 
+        // This function parses the information out of the received response from API
         private String readInputStream(InputStream inputStream) throws IOException {
             StringBuilder output = new StringBuilder();
             if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 String line = reader.readLine();
                 while (line != null) {
@@ -121,79 +155,20 @@ public class NearestCityInfoActivity extends AppCompatActivity {
                 }
             }
 
-            JSONObject parentObject;
-            try {
-                parentObject = new JSONObject(output.toString());
-                myIP = parentObject.getString("ip");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return output.toString();
-        }
+            // Defining all JSON Objects for the parsing
+            JSONObject parentObject,
+                       dataObject,
+                       locationObject,
+                       weatherObject,
+                       pollutionObject,
+                       currentObject;
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
-
-    public class NearestHttpRequest extends AsyncTask<URL, String, String> {
-
-        @Override
-        protected String doInBackground(URL... urls) {
-
-            URL url;
-
-            try {
-                url = new URL(MY_NEAREST_URL);
-            } catch (MalformedURLException exception) {
-                Log.e("errorTag", "Error with creating URL", exception);
-                return null;
-            }
-
-            String jsonResponse = "";
-            try {
-                jsonResponse = makeHttpRequest(url);
-            } catch (IOException e) {
-                Log.e("errorTag", "Error in request");
-            }
-            return jsonResponse;
-        }
-
-        private String makeHttpRequest(URL url) throws IOException {
-            String jsonResponse;
-            HttpURLConnection urlConnection;
-            InputStream inputStream;
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.setRequestProperty("x-forwarded-for", myIP);
-            urlConnection.connect();
-            inputStream = urlConnection.getInputStream();
-            jsonResponse = readInputStream(inputStream);
-
-            return jsonResponse;
-        }
-
-        private String readInputStream(InputStream inputStream) throws IOException {
-            StringBuilder output = new StringBuilder();
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
-                BufferedReader reader = new BufferedReader(inputStreamReader);
-                String line = reader.readLine();
-                while (line != null) {
-                    output.append(line);
-                    line = reader.readLine();
-                }
-            }
-
-            JSONObject parentObject;
-            JSONObject dataObject;
-            JSONObject locationObject;
             JSONArray coordinateArray;
-            JSONObject weatherObject;
-            JSONObject pollutionObject;
-            JSONObject currentObject;
+
             try {
+
+                // Parsing the received JSON Objects from the network request and assigning the variables
+                // 'output' StringBuilder contains the response here
                 parentObject = new JSONObject(output.toString());
                 dataObject = parentObject.getJSONObject("data");
                 myCity = dataObject.getString("city");
@@ -217,17 +192,22 @@ public class NearestCityInfoActivity extends AppCompatActivity {
                 aqi = pollutionObject.getInt("aqius");
 
             } catch (JSONException e) {
+
+                // Catch any possible exceptions here
                 e.printStackTrace();
             }
+
+            // same output is returned by the function
             return output.toString();
         }
 
+        // This method is executed after the asynchronous request is completed and has sent the response
+        // This method is executed after doInBackground() method
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            nearestProgress.setVisibility(View.GONE);
-
+            // Putting the values according to the AQI of the location
             if ((aqi > 0) && (aqi <= 50)) {
                 category = getString(R.string.good);
                 Face.setImageResource(R.drawable.ic_face_green);
@@ -254,7 +234,7 @@ public class NearestCityInfoActivity extends AppCompatActivity {
                 Face.setBackgroundColor(getResources().getColor(R.color.ic_orange));
                 OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
                 AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_orange));
-                SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
+                SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_orange);
                 SuggestionIcon2.setImageResource(R.drawable.ic_health_window_red);
                 SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_orange);
                 SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
@@ -266,7 +246,7 @@ public class NearestCityInfoActivity extends AppCompatActivity {
                 AtmosphereCardColor.setBackgroundColor(getResources().getColor(R.color.ic_red));
                 SuggestionIcon1.setImageResource(R.drawable.ic_health_sport_red);
                 SuggestionIcon2.setImageResource(R.drawable.ic_health_window_red);
-                SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_red);
+                SuggestionIcon3.setImageResource(R.drawable.ic_health_mask_orange);
                 SuggestionIcon4.setImageResource(R.drawable.ic_health_airpurifier_red);
             } else if ((aqi > 200) && (aqi <= 300)) {
                 category = getString(R.string.very_unhealthy);
@@ -375,21 +355,6 @@ public class NearestCityInfoActivity extends AppCompatActivity {
             Humidity.setText(humidity + "%");
             WindSpeed.setText(windSpeed + " m/s");
             WindDirection.setText(windDirection + "° due N");
-
-            goToMap.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent sendDataToMap = new Intent(NearestCityInfoActivity.this, SpecificCityMapActivity.class);
-                    sendDataToMap.putExtra("LONGITUDE", cityLongitude);
-                    sendDataToMap.putExtra("LATITUDE", cityLatitude);
-                    sendDataToMap.putExtra("COUNTRY", myCountry);
-                    sendDataToMap.putExtra("STATE", myState);
-                    sendDataToMap.putExtra("CITY", myCity);
-                    sendDataToMap.putExtra("AQI", aqi);
-                    startActivity(sendDataToMap);
-                }
-            });
-
         }
 
     }

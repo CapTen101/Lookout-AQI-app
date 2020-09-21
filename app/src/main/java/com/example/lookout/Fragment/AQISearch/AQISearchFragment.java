@@ -1,4 +1,4 @@
-package com.example.lookout.ui.AQISearch;
+package com.example.lookout.Fragment.AQISearch;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -32,7 +32,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class AQISearchFragment extends Fragment {
@@ -45,15 +45,21 @@ public class AQISearchFragment extends Fragment {
     private TextView City, State, Country, Temperature, Aqi, Category;
     private ImageView WeatherIcon, Face, OtherSideFaceColor, searchIconState, searchIconCity;
     private CardView aqiCard;
-    private Button map_button;
-    private ProgressBar ProgressBar1, ProgressBar2, ProgressBar3;
+    private Button map_button, nearestData;
+    private ProgressBar ProgressBar1,
+            ProgressBar2,
+            ProgressBar3;
     ArrayList<String> stateList = new ArrayList<>(1);
     ArrayList<String> cityList = new ArrayList<>(1);
-    private final String COUNTRY_LIST_URL = "https://api.airvisual.com/v2/countries?key=9a11661d-a1a4-4629-8030-3669adaade7d";
+
+    // Setting the Key and URL for the GET request
+    private final String API_KEY = getResources().getString(R.string.API_KEY);
+    private final String COUNTRY_LIST_URL = "https://api.airvisual.com/v2/countries?key=" + API_KEY;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
+        // Inflating all the views with their respective XML layouts
         Temperature = root.findViewById(R.id.temperature_value);
         Aqi = root.findViewById(R.id.aqi);
         Category = root.findViewById(R.id.category);
@@ -70,7 +76,7 @@ public class AQISearchFragment extends Fragment {
         searchIconState = root.findViewById(R.id.state_search_icon);
         searchIconCity = root.findViewById(R.id.city_search_icon);
 
-        Button nearestData;
+        // This onClickListener is invoked when the nearestData Button is clicked
         nearestData = root.findViewById(R.id.nearest_data_button);
         nearestData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,16 +86,21 @@ public class AQISearchFragment extends Fragment {
             }
         });
 
+        // Setting up the autocomplete textviews
         countrySearch = root.findViewById(R.id.country_search);
         countrySearch.setHint("Search your Country here");
+
         stateSearch = root.findViewById(R.id.state_search);
         stateSearch.setHint("Search your State here");
+
         citySearch = root.findViewById(R.id.city_search);
         citySearch.setHint("Search your City here");
 
+        // Execute the GET Request
         COUNTRYHttpRequest requestCountry = new COUNTRYHttpRequest();
         requestCountry.execute();
 
+        // Setting up the ArrayAdapter for the AutoCompleteTextViews of country
         ArrayAdapter<String> adapterCountry = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, countryList);
         countrySearch.setAdapter(adapterCountry);
         countrySearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -97,20 +108,25 @@ public class AQISearchFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 myCountry = countrySearch.getText().toString();
 
-                if(countrySearch.getText().toString().equals("United Kingdom")){
+                // There was some non-uniformity JSON response specifically in case of United Kingdom
+                // Hence setting it manually
+                if (countrySearch.getText().toString().equals("United Kingdom")) {
                     myCountry = "UK";
                 }
 
                 ProgressBar2.setVisibility(View.VISIBLE);
 
+                // Initiating the State request after getting the country
                 STATEHttpRequest requestState = new STATEHttpRequest();
                 requestState.execute();
 
+                // Setting up the adapterState
                 ArrayAdapter<String> adapterState = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, stateList);
                 stateSearch.setAdapter(adapterState);
             }
         });
 
+        // Setting up the ArrayAdapter for the AutoCompleteTextViews of state
         stateSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -118,18 +134,23 @@ public class AQISearchFragment extends Fragment {
 
                 ProgressBar3.setVisibility(View.VISIBLE);
 
+                // Initiating the City request after getting the state
                 CITYHttpRequest requestState = new CITYHttpRequest();
                 requestState.execute();
 
+                // Setting up the adapterCity
                 ArrayAdapter<String> adapterCity = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, cityList);
                 citySearch.setAdapter(adapterCity);
             }
         });
 
+        // Setting up the ArrayAdapter for the AutoCompleteTextViews of city
         citySearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 myCity = citySearch.getText().toString();
+
+                // Initiating the SpecificCityRequest request
                 SpecificCityRequest requestCity = new SpecificCityRequest();
                 requestCity.execute();
             }
@@ -154,20 +175,28 @@ public class AQISearchFragment extends Fragment {
         return root;
     }
 
-
+    // This ASyncTask handles the asynchronous network request sent to the country search endpoint of the API
     public class COUNTRYHttpRequest extends AsyncTask<URL, String, String> {
 
+        // This method hits the API and gets the response for us.
+        // This is executed first before any other below mentioned functions.
         @Override
         protected String doInBackground(URL... urls) {
 
             URL url;
+
+            // Enclosing the URL Creation in a try-catch
+            // for logging any possible exceptions that might occur during runtime
             try {
-                url = new URL(COUNTRY_LIST_URL);
+                url = new URL("https://api.airvisual.com/v2/countries?" +
+                                        "key=" + API_KEY);
             } catch (MalformedURLException exception) {
                 Log.e("errorTag", "Error with creating URL", exception);
                 return null;
             }
 
+            // Had to initialise empty here
+            // since the compiler was giving error for an uninitialised variable
             String jsonResponse = "";
             try {
                 jsonResponse = makeHttpRequest(url);
@@ -177,6 +206,7 @@ public class AQISearchFragment extends Fragment {
             return jsonResponse;
         }
 
+        // This method is executed after the asynchronous request is completed and has sent the response
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -184,6 +214,7 @@ public class AQISearchFragment extends Fragment {
             countrySearch.setVisibility(View.VISIBLE);
         }
 
+        // This function makes the HTTP request and gets the response
         private String makeHttpRequest(URL url) throws IOException {
             String jsonResponse;
             HttpURLConnection urlConnection;
@@ -198,11 +229,12 @@ public class AQISearchFragment extends Fragment {
             return jsonResponse;
         }
 
+        // This function parses the information out of the received response from API
         private String readInputStream(InputStream inputStream) throws IOException {
 
             StringBuilder output = new StringBuilder();
             if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 String line = reader.readLine();
                 while (line != null) {
@@ -211,6 +243,7 @@ public class AQISearchFragment extends Fragment {
                 }
             }
 
+            // Defining all JSON Objects for the parsing
             String finalOutput = output.toString();
             JSONObject parentObject;
             JSONArray dataArray;
@@ -228,6 +261,7 @@ public class AQISearchFragment extends Fragment {
         }
     }
 
+    // This ASyncTask handles the asynchronous network request sent to the state search endpoint of the API
     public class STATEHttpRequest extends AsyncTask<URL, String, String> {
 
         @Override
@@ -235,13 +269,16 @@ public class AQISearchFragment extends Fragment {
 
             URL url;
             try {
-                final String STATE_LIST_URL = "https://api.airvisual.com/v2/states?country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
+                final String STATE_LIST_URL = "https://api.airvisual.com/v2/states?country=" + myCountry +
+                                                "&key=" + API_KEY;
                 url = new URL(STATE_LIST_URL);
             } catch (MalformedURLException exception) {
                 Log.e("errorTag", "Error with creating URL", exception);
                 return null;
             }
 
+            // Had to initialise empty here
+            // since the compiler was giving error for an uninitialised variable
             String jsonResponse = "";
             try {
 
@@ -252,6 +289,7 @@ public class AQISearchFragment extends Fragment {
             return jsonResponse;
         }
 
+        // This method is executed after the asynchronous request is completed and has sent the response
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -278,7 +316,7 @@ public class AQISearchFragment extends Fragment {
 
             StringBuilder output = new StringBuilder();
             if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 String line = reader.readLine();
                 while (line != null) {
@@ -305,20 +343,31 @@ public class AQISearchFragment extends Fragment {
         }
     }
 
+    // This ASyncTask handles the asynchronous network request sent to the city search endpoint of the API
     public class CITYHttpRequest extends AsyncTask<URL, String, String> {
 
+        // This method hits the API and gets the response for us.
+        // This is executed first before any other below mentioned functions.
         @Override
         protected String doInBackground(URL... urls) {
 
             URL url;
+
+            // Enclosing the URL Creation in a try-catch
+            // for logging any possible exceptions that might occur during runtime
             try {
-                final String CITY_LIST_URL = "https://api.airvisual.com/v2/cities?state=" + myState + "&country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
+                final String CITY_LIST_URL = "https://api.airvisual.com/v2/cities?state=" + myState +
+                                                "&country=" + myCountry +
+                                                "&key=" + API_KEY;
+
                 url = new URL(CITY_LIST_URL);
             } catch (MalformedURLException exception) {
                 Log.e("errorTag", "Error with creating URL", exception);
                 return null;
             }
 
+            // Had to initialise empty here
+            // since the compiler was giving error for an uninitialised variable
             String jsonResponse = "";
             try {
 
@@ -337,6 +386,7 @@ public class AQISearchFragment extends Fragment {
             searchIconCity.setVisibility(View.VISIBLE);
         }
 
+        // This function makes the HTTP request and gets the response
         private String makeHttpRequest(URL url) throws IOException {
             String jsonResponse;
             HttpURLConnection urlConnection;
@@ -355,7 +405,7 @@ public class AQISearchFragment extends Fragment {
 
             StringBuilder output = new StringBuilder();
             if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 String line = reader.readLine();
                 while (line != null) {
@@ -382,6 +432,7 @@ public class AQISearchFragment extends Fragment {
         }
     }
 
+    // This ASyncTask handles the asynchronous network request sent to the specific search endpoint of the API
     public class SpecificCityRequest extends AsyncTask<URL, String, String> {
 
         @Override
@@ -389,14 +440,23 @@ public class AQISearchFragment extends Fragment {
 
             URL url;
 
+            // Enclosing the URL Creation in a try-catch
+            // for logging any possible exceptions that might occur during runtime
             try {
-                final String SPECIFIC_CITY_URL = "https://api.airvisual.com/v2/city?city=" + myCity + "&state=" + myState + "&country=" + myCountry + "&key=9a11661d-a1a4-4629-8030-3669adaade7d";
+
+                final String SPECIFIC_CITY_URL = "https://api.airvisual.com/v2/city?city=" + myCity +
+                                                    "&state=" + myState +
+                                                    "&country=" + myCountry +
+                                                    "&key=" + API_KEY;
+
                 url = new URL(SPECIFIC_CITY_URL);
             } catch (MalformedURLException exception) {
                 Log.e("errorTag", "Error with creating URL", exception);
                 return null;
             }
 
+            // Had to initialise empty here
+            // since the compiler was giving error for an uninitialised variable
             String jsonResponse = "";
             try {
                 jsonResponse = makeHttpRequest(url);
@@ -406,6 +466,7 @@ public class AQISearchFragment extends Fragment {
             return jsonResponse;
         }
 
+        // This function makes the HTTP request and gets the response
         private String makeHttpRequest(URL url) throws IOException {
             String jsonResponse;
             HttpURLConnection urlConnection;
@@ -420,10 +481,11 @@ public class AQISearchFragment extends Fragment {
             return jsonResponse;
         }
 
+        // This function parses the information out of the received response from API
         private String readInputStream(InputStream inputStream) throws IOException {
             StringBuilder output = new StringBuilder();
             if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 String line = reader.readLine();
                 while (line != null) {
@@ -432,14 +494,20 @@ public class AQISearchFragment extends Fragment {
                 }
             }
 
-            JSONObject parentObject;
-            JSONObject dataObject;
-            JSONObject locationObject;
+            // Defining all JSON Objects for the parsing
+            JSONObject parentObject,
+                    dataObject,
+                    locationObject,
+                    weatherObject,
+                    pollutionObject,
+                    currentObject;
+
             JSONArray coordinateArray;
-            JSONObject weatherObject;
-            JSONObject pollutionObject;
-            JSONObject currentObject;
+
+            // Parsing the received JSON Objects from the network request and assigning the variables
+            // 'output' StringBuilder contains the response here
             try {
+
                 parentObject = new JSONObject(output.toString());
                 dataObject = parentObject.getJSONObject("data");
                 myCity = dataObject.getString("city");
@@ -464,6 +532,7 @@ public class AQISearchFragment extends Fragment {
             return output.toString();
         }
 
+        // This method is executed after the asynchronous request is completed and has sent the response
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -500,6 +569,7 @@ public class AQISearchFragment extends Fragment {
                 OtherSideFaceColor.setBackgroundColor(getResources().getColor(R.color.ic_purple));
             }
 
+            // Setting up the image views according to the weatherIconCode
             switch (weatherIconCode) {
                 case "01d":
                     WeatherIcon.setImageResource(R.drawable.ic_01d);
@@ -564,6 +634,7 @@ public class AQISearchFragment extends Fragment {
             Category.setText("" + category);
             Temperature.setText("" + temperature + "°C");
 
+            // OnClickListener for the Google Map toggle button
             map_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -578,8 +649,7 @@ public class AQISearchFragment extends Fragment {
                 }
             });
 
-            Log.e("places", "" + cityLatitude + cityLongitude + myCountry + myState + myCity + aqi);
-
+            // OnClickListener for the specific city AQI Card button
             aqiCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

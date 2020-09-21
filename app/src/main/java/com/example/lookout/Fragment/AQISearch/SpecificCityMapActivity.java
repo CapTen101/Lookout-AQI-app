@@ -1,4 +1,4 @@
-package com.example.lookout.ui.AQISearch;
+package com.example.lookout.Fragment.AQISearch;
 
 import android.content.Intent;
 import android.os.Bundle;

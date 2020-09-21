@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.lookout.ui.home.HomeFragment"
+        android:name="com.example.lookout.Fragment.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.lookout.ui.WorldMap.GoToMapButtonFragment"
+        android:name="com.example.lookout.Fragment.WorldMap.GoToMapButtonFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.lookout.ui.AQISearch.AQISearchFragment"
+        android:name="com.example.lookout.Fragment.AQISearch.AQISearchFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

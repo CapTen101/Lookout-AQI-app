@@ -1,4 +1,4 @@
-package com.example.lookout.ui.WorldMap;
+package com.example.lookout.Fragment.WorldMap;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class GoToMapButtonFragment extends Fragment {
@@ -35,9 +36,10 @@ public class GoToMapButtonFragment extends Fragment {
     ArrayList<String> aqiList = new ArrayList<>(1);
     double[] LatitudeList = new double[1028];
     double[] LongitudeList = new double[1028];
-    private String COMPLETE_DATA_URL = "https://api.waqi.info/map/bounds/?latlng=-85,-180,85,180&token=58af52459e24f1c64ccc68ce507a40569ddebed6";
     private Button map_button;
     private ProgressBar progressBar;
+
+    private String API_TOKEN;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -45,8 +47,11 @@ public class GoToMapButtonFragment extends Fragment {
         AllCitiesRequest requestCountry = new AllCitiesRequest();
         requestCountry.execute();
 
+        API_TOKEN = getResources().getString(R.string.API_TOKEN);
+
         progressBar = root.findViewById(R.id.progress_bar);
 
+        // OnCLickListener for the map_button
         map_button = root.findViewById(R.id.mapbutton);
         map_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,19 +67,25 @@ public class GoToMapButtonFragment extends Fragment {
         return root;
     }
 
+    // This ASyncTask handles the asynchronous network request sent to the API
     public class AllCitiesRequest extends AsyncTask<URL, String, String> {
 
         @Override
         protected String doInBackground(URL... urls) {
 
             URL url;
+
+            // Enclosing the URL Creation in a try-catch
+            // for logging any possible exceptions that might occur during runtime
             try {
-                url = new URL(COMPLETE_DATA_URL);
+                url = new URL("https://api.waqi.info/map/bounds/?latlng=-85,-180,85,180&token=" + API_TOKEN);
             } catch (MalformedURLException exception) {
                 Log.e("errorTag", "Error with creating URL", exception);
                 return null;
             }
 
+            // Had to initialise empty here
+            // since the compiler was giving error for an uninitialised variable
             String jsonResponse = "";
             try {
                 jsonResponse = makeHttpRequest(url);
@@ -84,6 +95,8 @@ public class GoToMapButtonFragment extends Fragment {
             return jsonResponse;
         }
 
+        // This method is executed after the asynchronous request is completed and has sent the response
+        // This method is executed after doInBackground() method
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -102,11 +115,11 @@ public class GoToMapButtonFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.e("array ready", cityList.get(2) + " " + LatitudeList[2] + " " + LongitudeList[2]);
             progressBar.setVisibility(View.GONE);
             map_button.setVisibility(View.VISIBLE);
         }
 
+        // This function makes the HTTP request and gets the response
         private String makeHttpRequest(URL url) throws IOException {
             String jsonResponse;
             HttpURLConnection urlConnection;
@@ -121,11 +134,12 @@ public class GoToMapButtonFragment extends Fragment {
             return jsonResponse;
         }
 
+        // This function parses the information out of the received response from API
         private String readInputStream(InputStream inputStream) throws IOException {
 
             StringBuilder output = new StringBuilder();
             if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 String line = reader.readLine();
                 while (line != null) {
@@ -134,8 +148,7 @@ public class GoToMapButtonFragment extends Fragment {
                 }
             }
 
-            String finalOutput = output.toString();
-            return finalOutput;
+            return output.toString();
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.lookout.ui.home;
+package com.example.lookout.Fragment.home;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
