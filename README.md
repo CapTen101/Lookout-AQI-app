@@ -15,7 +15,7 @@ information about air index using custom markers.
 
 * It can suggest various precautions based on the AQI levels in the air surrounding the user.
 
-<img src="https://img.techpowerup.org/200319/home.jpg" alt="Home Screen" width="235" height="485"/>   <img src="https://img.techpowerup.org/200319/delhi.jpg" alt="Delhi Screen" width="235" height="485"/>   <img src="https://img.techpowerup.org/200319/china.jpg" alt="China Screen" width="235" height="485"/>   <img src="https://img.techpowerup.org/200319/aqi-map.jpg" alt="aqi map Screen" width="235" height="485"/>
+<img src="https://github.com/CapTen101/Lookout-AQI-app/blob/master/lookout_screenshots/home.jpg" alt="Home Screen" width="235" height="485"/>   <img src="https://github.com/CapTen101/Lookout-AQI-app/blob/master/lookout_screenshots/delhi.jpg" alt="Delhi Screen" width="235" height="485"/>   <img src="https://github.com/CapTen101/Lookout-AQI-app/blob/master/lookout_screenshots/china.jpg" alt="China Screen" width="235" height="485"/>   <img src="https://github.com/CapTen101/Lookout-AQI-app/blob/master/lookout_screenshots/aqi_map.jpg" alt="aqi map Screen" width="235" height="485"/>
 
 
 # License
